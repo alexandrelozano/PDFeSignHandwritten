@@ -31,6 +31,8 @@ namespace PDFeSignHandwritten
         private Int32 X2;
         private Int32 Y2;
 
+        private fSign frmSign;
+
         public fMain()
         {
             InitializeComponent();
@@ -164,12 +166,22 @@ namespace PDFeSignHandwritten
 
         private void bttPDFSign_Click(object sender, EventArgs e)
         {
+            if (PDFDoc == null)
+            {
+                MessageBox.Show("First you need to open a PDF to sign", "PDF Sign", MessageBoxButtons.OK);
+                return;
+            }
+
             if (X1==-1 || Y1==-1 || X2==-1 || Y2 == -1)
             {
                 MessageBox.Show("First you need to draw a rectangle on the page", "PDF Sign", MessageBoxButtons.OK);
+                return;
             }
 
-            fSign frmSign = new fSign();
+            if (frmSign == null) frmSign = new fSign();
+            frmSign.txtPDFOutput.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "out.pdf");
+            frmSign.txtCertificate.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "sample.p12");
+            frmSign.txtCertificatePassword.Text = "sample";
             frmSign.ShowDialog();
 
             Int32 t;
@@ -193,20 +205,20 @@ namespace PDFeSignHandwritten
             }
 
             //load the certificate
-            PdfCertificate cert = new PdfCertificate(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples","sample.p12"),"sample");
+            PdfCertificate cert = new PdfCertificate(frmSign.txtCertificate.Text,frmSign.txtCertificatePassword.Text);
 
             //add a signature to the specified position
             PdfSignature signature = new PdfSignature(PDFDoc, PDFDoc.Pages[PageCurrent - 1], cert, "signature");
             signature.Bounds = new RectangleF(new PointF(x1pdf, y1pdf), new SizeF(x2pdf - x1pdf, y2pdf - y1pdf));
 
             //set the signature content
-            signature.NameLabel = "Digitally signed by:Gary";
+            signature.NameLabel = frmSign.txtName.Text;
             signature.LocationInfoLabel = "Location:";
-            signature.LocationInfo = "CN";
+            signature.LocationInfo = frmSign.txtLocation.Text;
             signature.ReasonLabel = "Reason: ";
-            signature.Reason = "Ensure authenticity";
+            signature.Reason = frmSign.txtReason.Text;
             signature.ContactInfoLabel = "Contact Number: ";
-            signature.ContactInfo = "028-81705109";
+            signature.ContactInfo = frmSign.txtContactInfo.Text;
             signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill | PdfCertificationFlags.ForbidChanges;
             signature.GraphicsMode = GraphicMode.SignImageAndSignDetail;
             signature.SignImageSource = PdfImage.FromImage(frmSign.picSign.Image);
@@ -217,13 +229,15 @@ namespace PDFeSignHandwritten
             signature.ConfigureTimestamp(url);
 
             //save to file
-            PDFDoc.SaveToFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "out.pdf"));
+            PDFDoc.SaveToFile(frmSign.txtPDFOutput.Text);
 
+            MessageBox.Show(string.Format("PDF signed saved at {0}", frmSign.txtPDFOutput.Text), "PDF Sign", MessageBoxButtons.OK);
+
+            //reset variables
             X1 = -1;
             Y1 = -1;
             X2 = -1;
             Y2 = -1;
-
             PDFDoc = new PdfDocument();
             picPDF.Image = null;
             lblPageInfo.Text = "";

@@ -29,30 +29,15 @@ namespace PDFeSignHandwritten
         /// </summary>
         private void InitializeComponent()
         {
-            this.picPDF = new System.Windows.Forms.PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.lblPageInfo = new System.Windows.Forms.Label();
             this.bttPageNext = new System.Windows.Forms.Button();
             this.bttPagePrev = new System.Windows.Forms.Button();
-            this.bttPDFOpen = new System.Windows.Forms.Button();
             this.bttPDFSign = new System.Windows.Forms.Button();
+            this.picPDF = new System.Windows.Forms.PictureBox();
+            this.bttPDFOpen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picPDF)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picPDF
-            // 
-            this.picPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.picPDF.Location = new System.Drawing.Point(12, 49);
-            this.picPDF.Name = "picPDF";
-            this.picPDF.Size = new System.Drawing.Size(778, 580);
-            this.picPDF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picPDF.TabIndex = 11;
-            this.picPDF.TabStop = false;
-            this.picPDF.Paint += new System.Windows.Forms.PaintEventHandler(this.picPDF_Paint);
-            this.picPDF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPDF_MouseDown);
-            this.picPDF.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picPDF_MouseMove);
-            this.picPDF.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picPDF_MouseUp);
             // 
             // lblPageInfo
             // 
@@ -83,18 +68,10 @@ namespace PDFeSignHandwritten
             this.bttPagePrev.UseVisualStyleBackColor = true;
             this.bttPagePrev.Click += new System.EventHandler(this.bttPagePrev_Click);
             // 
-            // bttPDFOpen
-            // 
-            this.bttPDFOpen.Location = new System.Drawing.Point(12, 10);
-            this.bttPDFOpen.Name = "bttPDFOpen";
-            this.bttPDFOpen.Size = new System.Drawing.Size(146, 33);
-            this.bttPDFOpen.TabIndex = 7;
-            this.bttPDFOpen.Text = "Open PDF...";
-            this.bttPDFOpen.UseVisualStyleBackColor = true;
-            this.bttPDFOpen.Click += new System.EventHandler(this.bttPDFOpen_Click);
-            // 
             // bttPDFSign
             // 
+            this.bttPDFSign.Image = global::PDFeSignHandwritten.Properties.Resources.pencil;
+            this.bttPDFSign.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bttPDFSign.Location = new System.Drawing.Point(319, 10);
             this.bttPDFSign.Name = "bttPDFSign";
             this.bttPDFSign.Size = new System.Drawing.Size(139, 33);
@@ -102,6 +79,34 @@ namespace PDFeSignHandwritten
             this.bttPDFSign.Text = "Sign...";
             this.bttPDFSign.UseVisualStyleBackColor = true;
             this.bttPDFSign.Click += new System.EventHandler(this.bttPDFSign_Click);
+            // 
+            // picPDF
+            // 
+            this.picPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.picPDF.Location = new System.Drawing.Point(12, 49);
+            this.picPDF.Name = "picPDF";
+            this.picPDF.Size = new System.Drawing.Size(778, 580);
+            this.picPDF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPDF.TabIndex = 11;
+            this.picPDF.TabStop = false;
+            this.picPDF.Paint += new System.Windows.Forms.PaintEventHandler(this.picPDF_Paint);
+            this.picPDF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPDF_MouseDown);
+            this.picPDF.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picPDF_MouseMove);
+            this.picPDF.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picPDF_MouseUp);
+            // 
+            // bttPDFOpen
+            // 
+            this.bttPDFOpen.Image = global::PDFeSignHandwritten.Properties.Resources.page_white_acrobat;
+            this.bttPDFOpen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bttPDFOpen.Location = new System.Drawing.Point(12, 10);
+            this.bttPDFOpen.Name = "bttPDFOpen";
+            this.bttPDFOpen.Size = new System.Drawing.Size(146, 33);
+            this.bttPDFOpen.TabIndex = 7;
+            this.bttPDFOpen.Text = "Open PDF...";
+            this.bttPDFOpen.UseVisualStyleBackColor = true;
+            this.bttPDFOpen.Click += new System.EventHandler(this.bttPDFOpen_Click);
             // 
             // fMain
             // 
@@ -114,7 +119,9 @@ namespace PDFeSignHandwritten
             this.Controls.Add(this.bttPagePrev);
             this.Controls.Add(this.bttPDFOpen);
             this.Controls.Add(this.bttPDFSign);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF handwritten eSign";
             ((System.ComponentModel.ISupportInitialize)(this.picPDF)).EndInit();
             this.ResumeLayout(false);
