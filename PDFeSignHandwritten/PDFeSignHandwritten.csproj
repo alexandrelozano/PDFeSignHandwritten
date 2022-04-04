@@ -114,5 +114,8 @@
   <ItemGroup>
     <None Include="Resources\page_white_acrobat.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="samples\PDFeSignHandwritten.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
