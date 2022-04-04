@@ -1,5 +1,5 @@
 # PDFeSignHandwritten
-Windows executable for sign a PDF with a certificate and a handwritten signature.
+Windows executable for sign a PDF with a certificate and a handwritten firm.
 
 Winforms csharp using nugget package [Free SpirePDF](https://www.e-iceblue.com/Introduce/free-pdf-component.html#.YkrLnihBw-U) (limited to documents up to 10 pages).
 
