@@ -225,8 +225,7 @@ namespace PDFeSignHandwritten
             signature.SignImageLayout = SignImageLayout.Stretch;
 
             //configure a timestamp server
-            String url = "http://timestamp.wosign.com/rfc3161";
-            signature.ConfigureTimestamp(url);
+            signature.ConfigureTimestamp(frmSign.txtTimestampServer.Text);
 
             //save to file
             PDFDoc.SaveToFile(frmSign.txtPDFOutput.Text);

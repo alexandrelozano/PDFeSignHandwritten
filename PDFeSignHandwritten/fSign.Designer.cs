@@ -48,6 +48,8 @@ namespace PDFeSignHandwritten
             this.label7 = new System.Windows.Forms.Label();
             this.picSign = new System.Windows.Forms.PictureBox();
             this.bttSign = new System.Windows.Forms.Button();
+            this.txtTimestampServer = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             this.SuspendLayout();
             // 
@@ -216,11 +218,30 @@ namespace PDFeSignHandwritten
             this.bttSign.UseVisualStyleBackColor = true;
             this.bttSign.Click += new System.EventHandler(this.bttSign_Click);
             // 
+            // txtTimestampServer
+            // 
+            this.txtTimestampServer.Location = new System.Drawing.Point(543, 303);
+            this.txtTimestampServer.Name = "txtTimestampServer";
+            this.txtTimestampServer.Size = new System.Drawing.Size(172, 20);
+            this.txtTimestampServer.TabIndex = 21;
+            this.txtTimestampServer.Text = "http://timestamp.wosign.com/rfc3161";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(544, 287);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(93, 13);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Timestamp server:";
+            // 
             // fSign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 421);
+            this.Controls.Add(this.txtTimestampServer);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txtCertificatePassword);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.bttCertificate);
@@ -269,5 +290,7 @@ namespace PDFeSignHandwritten
         public System.Windows.Forms.TextBox txtCertificate;
         public System.Windows.Forms.TextBox txtCertificatePassword;
         private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.TextBox txtTimestampServer;
+        private System.Windows.Forms.Label label8;
     }
 }
