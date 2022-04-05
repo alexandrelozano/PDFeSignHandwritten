@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace PDFeSignHandwritten
     public partial class fMain : Form
     {
         private PdfDocument PDFDoc;
+        private string PDFPath;
         private int PageCurrent=0;
 
         // Visual rectangle drawing
@@ -51,8 +53,11 @@ namespace PDFeSignHandwritten
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                Cursor = Cursors.WaitCursor;
+                PDFPath = dlg.FileName;
                 PDFDoc = new PdfDocument();
                 PDFDoc.LoadFromFile(dlg.FileName);
+                Cursor = Cursors.Default;
                 PageCurrent = 1;
                 ShowPage();
             }
@@ -60,18 +65,47 @@ namespace PDFeSignHandwritten
 
         private void ShowPage()
         {
-            Image img = PDFDoc.SaveAsImage(PageCurrent - 1, PdfImageType.Bitmap, 150, 150);
+            if (picPDF.Image != null)
+            {
+                picPDF.Image.Dispose();
+                picPDF.Image = null;
+            }
+            GhostScriptConvertPage(PageCurrent);
+            Image img = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "out.jpg"));
             picPDF.Image = img;
 
             lblPageInfo.Text = string.Format("{0} / {1}", PageCurrent, PDFDoc.Pages.Count);
+        }
+
+        private void GhostScriptConvertPage(int PageNumber)
+        {
+            string outputImagesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "out.jpg");
+            string ghostScriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Ghostscript", "bin", "gswin32c.exe");
+
+            if (File.Exists(outputImagesPath)) File.Delete(outputImagesPath);
+
+            String args = String.Format("-o {0} -sDEVICE=jpeg -dJPEGQ=100 -r150 -dFirstPage={1} -dLastPage={2} {3}", outputImagesPath, PageNumber, PageNumber, PDFPath);
+            Process proc = new Process();
+            proc.StartInfo.FileName = ghostScriptPath;
+            proc.StartInfo.Arguments = args;
+            proc.StartInfo.CreateNoWindow = true;
+            proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.Start();
+            string strOutput = proc.StandardOutput.ReadToEnd();
+            Console.WriteLine(strOutput);
+            proc.WaitForExit();
         }
 
         private void bttPagePrev_Click(object sender, EventArgs e)
         {
             if (PageCurrent >1)
             {
+                Cursor = Cursors.WaitCursor;
                 PageCurrent--;
                 ShowPage();
+                Cursor = Cursors.Default;
             }
         }
 
@@ -79,8 +113,10 @@ namespace PDFeSignHandwritten
         {
             if (PageCurrent < PDFDoc.Pages.Count)
             {
+                Cursor = Cursors.WaitCursor;
                 PageCurrent++;
                 ShowPage();
+                Cursor = Cursors.Default;
             }
         }
 
@@ -237,6 +273,7 @@ namespace PDFeSignHandwritten
             Y1 = -1;
             X2 = -1;
             Y2 = -1;
+            PDFPath = "";
             PDFDoc = new PdfDocument();
             picPDF.Image = null;
             lblPageInfo.Text = "";
