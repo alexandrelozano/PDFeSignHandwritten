@@ -7,6 +7,6 @@ Uses the [GhostScript](https://www.ghostscript.com/) intertpreter portable editi
 
 Uses the [PDFSharp](http://www.pdfsharp.net/) library to create the digital signature.
 
-Download windows portable version [PDFeSignHandwritten v1.2](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/Executables/PDFeSignHandwritten_v1.2.zip)
+Download windows portable version [PDFeSignHandwritten v1.3](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/Executables/PDFeSignHandwritten_v1.3.zip)
 
 ![Sample](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/PDFeSignHandwritten/samples/PDFeSignHandwritten.gif)
