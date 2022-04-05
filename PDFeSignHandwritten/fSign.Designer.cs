@@ -225,6 +225,7 @@ namespace PDFeSignHandwritten
             this.txtTimestampServer.Size = new System.Drawing.Size(172, 20);
             this.txtTimestampServer.TabIndex = 21;
             this.txtTimestampServer.Text = "http://timestamp.wosign.com/rfc3161";
+            this.txtTimestampServer.Visible = false;
             // 
             // label8
             // 
@@ -234,6 +235,7 @@ namespace PDFeSignHandwritten
             this.label8.Size = new System.Drawing.Size(93, 13);
             this.label8.TabIndex = 20;
             this.label8.Text = "Timestamp server:";
+            this.label8.Visible = false;
             // 
             // fSign
             // 

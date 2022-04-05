@@ -33,18 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Spire.Doc, Version=10.2.5.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
-      <HintPath>packages\FreeSpire.Doc.10.2.0\lib\net40\Spire.Doc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Spire.License, Version=1.4.0.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
-      <HintPath>packages\FreeSpire.Doc.10.2.0\lib\net40\Spire.License.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Spire.Pdf, Version=8.2.2.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
-      <HintPath>packages\FreeSpire.Doc.10.2.0\lib\net40\Spire.Pdf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -1036,7 +1024,6 @@
     <None Include="Ghostscript\Resource\SubstCID\Korea1-WMode">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1070,6 +1057,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="samples\PDFeSignHandwritten.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PdfSharp-gdi\PdfSharp-gdi.csproj">
+      <Project>{5384ce57-1f94-4d22-860d-2e9c1ac12ddf}</Project>
+      <Name>PdfSharp-gdi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

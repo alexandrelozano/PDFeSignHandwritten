@@ -24,13 +24,6 @@ C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\PDFeSignHandwritten.exe.config
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\PDFeSignHandwritten.exe
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\PDFeSignHandwritten.pdb
-C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Spire.Doc.dll
-C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Spire.License.dll
-C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Spire.Pdf.dll
-C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Microsoft.mshtml.dll
-C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Spire.Doc.xml
-C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Spire.License.xml
-C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Spire.Pdf.xml
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\obj\Release\PDFeSignHandwritten.csproj.AssemblyReference.cache
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\obj\Release\PDFeSignHandwritten.fMain.resources
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\obj\Release\PDFeSignHandwritten.fSign.resources
@@ -358,3 +351,4 @@ C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Ghostscript\Resource\SubstCID\GB1-WMode
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Ghostscript\Resource\SubstCID\Japan1-WMode
 C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\Ghostscript\Resource\SubstCID\Korea1-WMode
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\PdfSharp-gdi.dll

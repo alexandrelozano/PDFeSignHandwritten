@@ -1,4 +1,10 @@
-﻿using System;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.AcroForms;
+using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf.Signatures;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,18 +12,16 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Spire.Pdf;
-using Spire.Pdf.Graphics;
-using Spire.Pdf.Security;
 
 namespace PDFeSignHandwritten
 {
     public partial class fMain : Form
     {
-        private PdfDocument PDFDoc;
+        PdfDocument pdfDocument;
         private string PDFPath;
         private int PageCurrent=0;
 
@@ -37,6 +41,7 @@ namespace PDFeSignHandwritten
 
         public fMain()
         {
+            X1 = Y1 = X2 = Y2 = -1;
             InitializeComponent();
         }
 
@@ -55,8 +60,7 @@ namespace PDFeSignHandwritten
             {
                 Cursor = Cursors.WaitCursor;
                 PDFPath = dlg.FileName;
-                PDFDoc = new PdfDocument();
-                PDFDoc.LoadFromFile(dlg.FileName);
+                pdfDocument = PdfReader.Open(PDFPath);
                 Cursor = Cursors.Default;
                 PageCurrent = 1;
                 ShowPage();
@@ -74,7 +78,7 @@ namespace PDFeSignHandwritten
             Image img = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "out.jpg"));
             picPDF.Image = img;
 
-            lblPageInfo.Text = string.Format("{0} / {1}", PageCurrent, PDFDoc.Pages.Count);
+            lblPageInfo.Text = string.Format("{0} / {1}", PageCurrent, 10);
         }
 
         private void GhostScriptConvertPage(int PageNumber)
@@ -111,7 +115,7 @@ namespace PDFeSignHandwritten
 
         private void bttPageNext_Click(object sender, EventArgs e)
         {
-            if (PageCurrent < PDFDoc.Pages.Count)
+            if (PageCurrent < pdfDocument.PageCount)
             {
                 Cursor = Cursors.WaitCursor;
                 PageCurrent++;
@@ -142,7 +146,7 @@ namespace PDFeSignHandwritten
             currentPos = e.Location;
             if (drawing) picPDF.Invalidate();
 
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && drawing)
             {
                 CoordsCalculate(e.X, e.Y, ref X2, ref Y2);
             }
@@ -202,7 +206,7 @@ namespace PDFeSignHandwritten
 
         private void bttPDFSign_Click(object sender, EventArgs e)
         {
-            if (PDFDoc == null)
+            if (PDFPath == null)
             {
                 MessageBox.Show("First you need to open a PDF to sign", "PDF Sign", MessageBoxButtons.OK);
                 return;
@@ -221,65 +225,101 @@ namespace PDFeSignHandwritten
             frmSign.ShowDialog();
 
             Int32 t;
-            Int32 x1pdf = (X1 * 595) / 1240;
-            Int32 y1pdf = (Y1 * 842) / 1753;
-            Int32 x2pdf = (X2 * 595) / 1240;
-            Int32 y2pdf = (Y2 * 842) / 1753;
+            Int32 x1pdf = (X1 * (int)pdfDocument.Pages[PageCurrent].Width.Point) / 1240;
+            Int32 y1pdf = (int)pdfDocument.Pages[PageCurrent].Height.Point - ((Y1 * (int)pdfDocument.Pages[0].Height.Point) / 1753);
+            Int32 x2pdf = (X2 * (int)pdfDocument.Pages[0].Width.Point) / 1240;
+            Int32 y2pdf = (int)pdfDocument.Pages[PageCurrent].Height.Point - ((Y2 * (int)pdfDocument.Pages[0].Height.Point) / 1753);
 
             if (x2pdf < x1pdf)
             {
                 t = x1pdf;
-                x1pdf = x2pdf;
-                x2pdf = t;
+                x2pdf = x1pdf;
+                x1pdf = t;
             }
 
             if (y2pdf < y1pdf)
             {
                 t = y2pdf;
-                y1pdf = y2pdf;
-                y2pdf = t;
+                y2pdf = y1pdf;
+                y1pdf = t;
             }
+            
+            PdfSignatureOptions options = new PdfSignatureOptions
+            {
+                ContactInfo = "Contact Info",
+                Location = "Paris",
+                Reason = "Test signatures",
+                Rectangle = new XRect(x1pdf, y1pdf, x2pdf - x1pdf, y2pdf - y1pdf),
+                AppearanceHandler = new SignAppearenceHandler(frmSign.picSign.Image, frmSign.txtName.Text, frmSign.txtLocation.Text, frmSign.txtReason.Text, frmSign.txtContactInfo.Text)
+            };
 
-            //load the certificate
-            PdfCertificate cert = new PdfCertificate(frmSign.txtCertificate.Text,frmSign.txtCertificatePassword.Text);
+            X509Certificate2 cert = new X509Certificate2(frmSign.txtCertificate.Text, frmSign.txtCertificatePassword.Text, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
+            PdfSignatureHandler pdfSignatureHandler = new PdfSignatureHandler(new DefaultSigner(cert), null, options);
+            pdfSignatureHandler.AttachToDocument(pdfDocument, PageCurrent-1);
+            pdfDocument.Save(frmSign.txtPDFOutput.Text);
 
-            //add a signature to the specified position
-            PdfSignature signature = new PdfSignature(PDFDoc, PDFDoc.Pages[PageCurrent - 1], cert, "signature");
-            signature.Bounds = new RectangleF(new PointF(x1pdf, y1pdf), new SizeF(x2pdf - x1pdf, y2pdf - y1pdf));
-
-            //set the signature content
-            signature.NameLabel = frmSign.txtName.Text;
-            signature.LocationInfoLabel = "Location:";
-            signature.LocationInfo = frmSign.txtLocation.Text;
-            signature.ReasonLabel = "Reason: ";
-            signature.Reason = frmSign.txtReason.Text;
-            signature.ContactInfoLabel = "Contact Number: ";
-            signature.ContactInfo = frmSign.txtContactInfo.Text;
-            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill | PdfCertificationFlags.ForbidChanges;
-            signature.GraphicsMode = GraphicMode.SignImageAndSignDetail;
-            signature.SignImageSource = PdfImage.FromImage(frmSign.picSign.Image);
-            signature.SignImageLayout = SignImageLayout.Stretch;
-
-            //configure a timestamp server
-            signature.ConfigureTimestamp(frmSign.txtTimestampServer.Text);
-
-            //save to file
-            PDFDoc.SaveToFile(frmSign.txtPDFOutput.Text);
-
+            Process.Start(frmSign.txtPDFOutput.Text);
             MessageBox.Show(string.Format("PDF signed saved at {0}", frmSign.txtPDFOutput.Text), "PDF Sign", MessageBoxButtons.OK);
 
             //reset variables
-            X1 = -1;
-            Y1 = -1;
-            X2 = -1;
-            Y2 = -1;
+            X1 = Y1 = X2 = Y2 = -1;
+            pdfDocument.Close();
+            pdfDocument = null;
             PDFPath = "";
-            PDFDoc = new PdfDocument();
-            picPDF.Image = null;
+            if (picPDF.Image != null)
+            {
+                picPDF.Image.Dispose();
+                picPDF.Image = null;
+            }
             lblPageInfo.Text = "";
             signingArea = new Rectangle();
-
+            frmSign.Dispose();
+            frmSign = null;
             Cursor = Cursors.Default;
+        }
+
+        private class SignAppearenceHandler : ISignatureAppearanceHandler
+        {
+            private XImage img;
+            private string name;
+            private string location;
+            private string reason;
+            private string contactinfo;
+
+            public SignAppearenceHandler(Image img, string name, string location, string reason, string contactinfo){
+                this.img = XImage.FromGdiPlusImage(img);
+                this.name = name;
+                this.location = location;
+                this.reason = reason;
+                this.contactinfo = contactinfo;
+            }
+
+            public void DrawAppearance(XGraphics gfx, XRect rect)
+            {
+                string text = "Name: " + name + "\nLocation: " + location +"\nReason: " + reason + "\nContact info: " + contactinfo + "\nDate: " + DateTime.Now.ToString();
+                XFont font = new XFont("Verdana", 7.0, XFontStyle.Regular);
+                XTextFormatter xTextFormatter = new XTextFormatter(gfx);
+                XPoint xPoint = new XPoint(0.0, 0.0);
+                bool flag = img != null;
+                if (flag)
+                {
+                    double zoom = CalculateZoomToFit(img, rect);
+                    gfx.DrawImage(img, xPoint.X, xPoint.Y, img.PixelWidth * zoom, img.PixelHeight * zoom);
+                    xPoint = new XPoint(rect.Width / 2.0, 0.0);
+                }
+                xTextFormatter.DrawString(text, font, new XSolidBrush(XColor.FromKnownColor(XKnownColor.Black)), new XRect(xPoint.X, xPoint.Y, rect.Width - xPoint.X, rect.Height), XStringFormats.TopLeft);
+            }
+
+            public double CalculateZoomToFit(XImage image, XRect targetPanel)
+            {
+                var panel_ratio = targetPanel.Width / targetPanel.Height;
+                var image_ratio = image.PixelWidth / image.PixelHeight;
+
+                return panel_ratio > image_ratio
+                     ? targetPanel.Height / image.PixelHeight
+                     : targetPanel.Width / image.PixelWidth
+                     ;
+            }
         }
     }
 }

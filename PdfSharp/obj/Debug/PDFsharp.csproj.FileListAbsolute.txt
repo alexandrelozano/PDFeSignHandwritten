@@ -1,0 +1,12 @@
+C:\Users\alexa\Downloads\PDFsharp-master\PDFsharp-master\src\PdfSharp\obj\Debug\PDFsharp.csproj.AssemblyReference.cache
+C:\Users\alexa\Source\PDFSharp\PdfSharp\obj\Debug\PDFsharp.csproj.AssemblyReference.cache
+C:\Users\alexa\Source\PDFSharp\PdfSharp\bin\Debug\PdfSharp.dll
+C:\Users\alexa\Source\PDFSharp\PdfSharp\bin\Debug\PdfSharp.pdb
+C:\Users\alexa\Source\PDFSharp\PdfSharp\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\alexa\Source\PDFSharp\PdfSharp\obj\Debug\PdfSharp.Resources.Messages.resources
+C:\Users\alexa\Source\PDFSharp\PdfSharp\obj\Debug\PdfSharp.Resources.Messages.de.resources
+C:\Users\alexa\Source\PDFSharp\PdfSharp\obj\Debug\PDFsharp.csproj.GenerateResource.cache
+C:\Users\alexa\Source\PDFSharp\PdfSharp\obj\Debug\PDFsharp.csproj.CoreCompileInputs.cache
+C:\Users\alexa\Source\PDFSharp\PdfSharp\obj\Debug\de\PdfSharp.resources.dll
+C:\Users\alexa\Source\PDFSharp\PdfSharp\obj\Debug\PdfSharp.dll
+C:\Users\alexa\Source\PDFSharp\PdfSharp\obj\Debug\PdfSharp.pdb
