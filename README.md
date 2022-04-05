@@ -7,6 +7,6 @@ Uses the [GhostScript](https://www.ghostscript.com/) intertpreter portable editi
 
 Also uses the nugget package [Free SpirePDF](https://www.e-iceblue.com/Introduce/free-pdf-component.html#.YkrLnihBw-U) (limited to documents up to 10 pages) to sign.
 
-Download windows portable version [PDFeSignHandwritten v1.1](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/Executables/PDFeSignHandwritten_v1.0.zip)
+Download windows portable version [PDFeSignHandwritten v1.1](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/Executables/PDFeSignHandwritten_v1.1.zip)
 
 ![Sample](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/PDFeSignHandwritten/samples/PDFeSignHandwritten.gif)
