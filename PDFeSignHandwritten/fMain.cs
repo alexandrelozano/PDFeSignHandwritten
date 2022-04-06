@@ -1,9 +1,14 @@
-﻿using PdfSharp.Drawing;
-using PdfSharp.Drawing.Layout;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.AcroForms;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Signatures;
+﻿using iText.IO.Image;
+using iText.Kernel.Font;
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas;
+using iText.Kernel.Pdf.Xobject;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Signatures;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Pkcs;
+using Org.BouncyCastle.X509;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +26,8 @@ namespace PDFeSignHandwritten
 {
     public partial class fMain : Form
     {
-        PdfDocument pdfDocument;
+        PdfReader PDFReader;
+        PdfDocument PDFDocument;
         private string PDFPath;
         private int PageCurrent=0;
 
@@ -60,7 +66,8 @@ namespace PDFeSignHandwritten
             {
                 Cursor = Cursors.WaitCursor;
                 PDFPath = dlg.FileName;
-                pdfDocument = PdfReader.Open(PDFPath);
+                PDFReader = new PdfReader(PDFPath);
+                PDFDocument = new PdfDocument(PDFReader);
                 Cursor = Cursors.Default;
                 PageCurrent = 1;
                 ShowPage();
@@ -75,7 +82,7 @@ namespace PDFeSignHandwritten
                 picPDF.Image = null;
             }
             GhostScriptConvertPage(PageCurrent);
-            Image img = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "out.jpg"));
+            System.Drawing.Image img = System.Drawing.Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "out.jpg"));
             picPDF.Image = img;
 
             lblPageInfo.Text = string.Format("{0} / {1}", PageCurrent, 10);
@@ -115,7 +122,7 @@ namespace PDFeSignHandwritten
 
         private void bttPageNext_Click(object sender, EventArgs e)
         {
-            if (PageCurrent < pdfDocument.PageCount)
+            if (PageCurrent < PDFDocument.GetNumberOfPages())
             {
                 Cursor = Cursors.WaitCursor;
                 PageCurrent++;
@@ -223,12 +230,14 @@ namespace PDFeSignHandwritten
             frmSign.txtCertificate.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "sample.p12");
             frmSign.txtCertificatePassword.Text = "sample";
             frmSign.ShowDialog();
-
+            
             Int32 t;
-            Int32 x1pdf = (X1 * (int)pdfDocument.Pages[PageCurrent].Width.Point) / 1240;
-            Int32 y1pdf = (int)pdfDocument.Pages[PageCurrent].Height.Point - ((Y1 * (int)pdfDocument.Pages[0].Height.Point) / 1753);
-            Int32 x2pdf = (X2 * (int)pdfDocument.Pages[0].Width.Point) / 1240;
-            Int32 y2pdf = (int)pdfDocument.Pages[PageCurrent].Height.Point - ((Y2 * (int)pdfDocument.Pages[0].Height.Point) / 1753);
+            Int32 pagewidth = (int)PDFDocument.GetPage(PageCurrent).GetPageSizeWithRotation().GetWidth();
+            Int32 pageheight = (int)PDFDocument.GetPage(PageCurrent).GetPageSizeWithRotation().GetHeight();
+            Int32 x1pdf = (X1 * pagewidth) / 1240;
+            Int32 y1pdf = pageheight - ((Y1 * pageheight) / 1753);
+            Int32 x2pdf = (X2 * pagewidth) / 1240;
+            Int32 y2pdf = pageheight - ((Y2 * pageheight) / 1753);
 
             if (x2pdf < x1pdf)
             {
@@ -243,28 +252,63 @@ namespace PDFeSignHandwritten
                 y2pdf = y1pdf;
                 y1pdf = t;
             }
-            
-            PdfSignatureOptions options = new PdfSignatureOptions
+
+            string KEYSTORE = frmSign.txtCertificate.Text;
+            char[] PASSWORD = frmSign.txtCertificatePassword.Text.ToCharArray();
+
+            Pkcs12Store pk12 = new Pkcs12Store(new FileStream(KEYSTORE, FileMode.Open, FileAccess.Read), PASSWORD);
+            string alias = null;
+            foreach (object a in pk12.Aliases)
             {
-                ContactInfo = "Contact Info",
-                Location = "Paris",
-                Reason = "Test signatures",
-                Rectangle = new XRect(x1pdf, y1pdf, x2pdf - x1pdf, y2pdf - y1pdf),
-                AppearanceHandler = new SignAppearenceHandler(frmSign.picSign.Image, frmSign.txtName.Text, frmSign.txtLocation.Text, frmSign.txtReason.Text, frmSign.txtContactInfo.Text)
-            };
+                alias = ((string)a);
+                if (pk12.IsKeyEntry(alias))
+                {
+                    break;
+                }
+            }
+            ICipherParameters pk = pk12.GetKey(alias).Key;
 
-            X509Certificate2 cert = new X509Certificate2(frmSign.txtCertificate.Text, frmSign.txtCertificatePassword.Text, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
-            PdfSignatureHandler pdfSignatureHandler = new PdfSignatureHandler(new DefaultSigner(cert), null, options);
-            pdfSignatureHandler.AttachToDocument(pdfDocument, PageCurrent-1);
-            pdfDocument.Save(frmSign.txtPDFOutput.Text);
+            X509CertificateEntry[] ce = pk12.GetCertificateChain(alias);
+            Org.BouncyCastle.X509.X509Certificate[] chain = new Org.BouncyCastle.X509.X509Certificate[ce.Length];
+            for (int k = 0; k < ce.Length; ++k)
+            {
+                chain[k] = ce[k].Certificate;
+            }
 
+            PdfReader PDFReaderSign = new PdfReader(PDFPath);
+            PdfSigner signer = new PdfSigner(PDFReaderSign, new FileStream(frmSign.txtPDFOutput.Text, FileMode.Create), new StampingProperties());
+
+            // Create the signature appearance
+            iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(x1pdf, y1pdf, x2pdf-x1pdf, y2pdf-y1pdf);
+            PdfSignatureAppearance appearance = signer.GetSignatureAppearance();
+            appearance
+                .SetReason(frmSign.txtReason.Text)
+                .SetLocation(frmSign.txtLocation.Text)
+                .SetContact(frmSign.txtContactInfo.Text)
+                .SetSignatureCreator(frmSign.txtName.Text)
+                .SetImage(ImageDataFactory.Create(frmSign.picSign.Image, Color.White))
+                .SetImageScale(CalculateZoomToFit(frmSign.picSign.Image, rect))
+                .SetPageRect(rect)
+                .SetPageNumber(PageCurrent);
+                
+            signer.SetSignDate(DateTime.Now);
+            signer.SetFieldName("sig");
+
+            IExternalSignature pks = new PrivateKeySignature(pk, DigestAlgorithms.SHA256);
+
+            ITSAClient tsaClient = new TSAClientBouncyCastle(frmSign.txtTimestampServer.Text, "", "", 8192, "SHA-256");
+            signer.SignDetached(pks, chain, null, null, tsaClient, 8192, PdfSigner.CryptoStandard.CMS);
+
+            MessageBox.Show("Signed PDF saved at " + frmSign.txtPDFOutput.Text, "PDFeSignHandwritten", MessageBoxButtons.OK);
             Process.Start(frmSign.txtPDFOutput.Text);
-            MessageBox.Show(string.Format("PDF signed saved at {0}", frmSign.txtPDFOutput.Text), "PDF Sign", MessageBoxButtons.OK);
 
             //reset variables
             X1 = Y1 = X2 = Y2 = -1;
-            pdfDocument.Close();
-            pdfDocument = null;
+            PDFDocument.Close();
+            PDFDocument = null;
+            PDFReader.Close();
+            PDFReader = null;
+            PDFReaderSign.Close();
             PDFPath = "";
             if (picPDF.Image != null)
             {
@@ -278,48 +322,15 @@ namespace PDFeSignHandwritten
             Cursor = Cursors.Default;
         }
 
-        private class SignAppearenceHandler : ISignatureAppearanceHandler
+        public float CalculateZoomToFit(System.Drawing.Image image, iText.Kernel.Geom.Rectangle targetPanel)
         {
-            private XImage img;
-            private string name;
-            private string location;
-            private string reason;
-            private string contactinfo;
+            var panel_ratio = targetPanel.GetWidth() / targetPanel.GetHeight();
+            var image_ratio = image.Width / image.Height;
 
-            public SignAppearenceHandler(Image img, string name, string location, string reason, string contactinfo){
-                this.img = XImage.FromGdiPlusImage(img);
-                this.name = name;
-                this.location = location;
-                this.reason = reason;
-                this.contactinfo = contactinfo;
-            }
-
-            public void DrawAppearance(XGraphics gfx, XRect rect)
-            {
-                string text = "Name: " + name + "\nLocation: " + location +"\nReason: " + reason + "\nContact info: " + contactinfo + "\nDate: " + DateTime.Now.ToString();
-                XFont font = new XFont("Verdana", 7.0, XFontStyle.Regular);
-                XTextFormatter xTextFormatter = new XTextFormatter(gfx);
-                XPoint xPoint = new XPoint(0.0, 0.0);
-                bool flag = img != null;
-                if (flag)
-                {
-                    double zoom = CalculateZoomToFit(img, rect);
-                    gfx.DrawImage(img, xPoint.X, xPoint.Y, img.PixelWidth * zoom, img.PixelHeight * zoom);
-                    xPoint = new XPoint(rect.Width / 2.0, 0.0);
-                }
-                xTextFormatter.DrawString(text, font, new XSolidBrush(XColor.FromKnownColor(XKnownColor.Black)), new XRect(xPoint.X, xPoint.Y, rect.Width - xPoint.X, rect.Height), XStringFormats.TopLeft);
-            }
-
-            public double CalculateZoomToFit(XImage image, XRect targetPanel)
-            {
-                var panel_ratio = targetPanel.Width / targetPanel.Height;
-                var image_ratio = image.PixelWidth / image.PixelHeight;
-
-                return panel_ratio > image_ratio
-                     ? targetPanel.Height / image.PixelHeight
-                     : targetPanel.Width / image.PixelWidth
-                     ;
-            }
+            return panel_ratio > image_ratio
+                 ? targetPanel.GetHeight() / image.Height
+                 : targetPanel.GetWidth() / image.Width
+                 ;
         }
     }
 }

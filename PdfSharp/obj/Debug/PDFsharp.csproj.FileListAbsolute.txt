@@ -1,0 +1,1 @@
+C:\Users\alexa\Downloads\PDFsharp-master\PDFsharp-master\src\PdfSharp\obj\Debug\PDFsharp.csproj.AssemblyReference.cache
