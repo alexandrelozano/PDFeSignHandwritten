@@ -48,6 +48,7 @@ namespace PDFeSignHandwritten
         public fMain()
         {
             X1 = Y1 = X2 = Y2 = -1;
+
             InitializeComponent();
         }
 
@@ -228,100 +229,101 @@ namespace PDFeSignHandwritten
             Cursor = Cursors.WaitCursor;
 
             if (frmSign == null) frmSign = new fSign();
-            frmSign.txtPDFOutput.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "out.pdf");
-            frmSign.txtCertificate.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "sample.p12");
-            frmSign.txtCertificatePassword.Text = "sample";
             frmSign.ShowDialog();
-            
-            Int32 t;
-            Int32 pagewidth = (int)PDFDocument.GetPage(PageCurrent).GetPageSizeWithRotation().GetWidth();
-            Int32 pageheight = (int)PDFDocument.GetPage(PageCurrent).GetPageSizeWithRotation().GetHeight();
-            Int32 x1pdf = (X1 * pagewidth) / 1240;
-            Int32 y1pdf = pageheight - ((Y1 * pageheight) / 1753);
-            Int32 x2pdf = (X2 * pagewidth) / 1240;
-            Int32 y2pdf = pageheight - ((Y2 * pageheight) / 1753);
 
-            if (x2pdf < x1pdf)
+            if (frmSign.sign)
             {
-                t = x1pdf;
-                x2pdf = x1pdf;
-                x1pdf = t;
-            }
+                Int32 t;
+                Int32 pagewidth = (int)PDFDocument.GetPage(PageCurrent).GetPageSizeWithRotation().GetWidth();
+                Int32 pageheight = (int)PDFDocument.GetPage(PageCurrent).GetPageSizeWithRotation().GetHeight();
+                Int32 x1pdf = (X1 * pagewidth) / 1240;
+                Int32 y1pdf = pageheight - ((Y1 * pageheight) / 1753);
+                Int32 x2pdf = (X2 * pagewidth) / 1240;
+                Int32 y2pdf = pageheight - ((Y2 * pageheight) / 1753);
 
-            if (y2pdf < y1pdf)
-            {
-                t = y2pdf;
-                y2pdf = y1pdf;
-                y1pdf = t;
-            }
-
-            string KEYSTORE = frmSign.txtCertificate.Text;
-            char[] PASSWORD = frmSign.txtCertificatePassword.Text.ToCharArray();
-
-            Pkcs12Store pk12 = new Pkcs12Store(new FileStream(KEYSTORE, FileMode.Open, FileAccess.Read), PASSWORD);
-            string alias = null;
-            foreach (object a in pk12.Aliases)
-            {
-                alias = ((string)a);
-                if (pk12.IsKeyEntry(alias))
+                if (x2pdf < x1pdf)
                 {
-                    break;
+                    t = x1pdf;
+                    x2pdf = x1pdf;
+                    x1pdf = t;
                 }
+
+                if (y2pdf < y1pdf)
+                {
+                    t = y2pdf;
+                    y2pdf = y1pdf;
+                    y1pdf = t;
+                }
+
+                string KEYSTORE = frmSign.txtCertificate.Text;
+                char[] PASSWORD = frmSign.txtCertificatePassword.Text.ToCharArray();
+
+                Pkcs12Store pk12 = new Pkcs12Store(new FileStream(KEYSTORE, FileMode.Open, FileAccess.Read), PASSWORD);
+                string alias = null;
+                foreach (object a in pk12.Aliases)
+                {
+                    alias = ((string)a);
+                    if (pk12.IsKeyEntry(alias))
+                    {
+                        break;
+                    }
+                }
+                ICipherParameters pk = pk12.GetKey(alias).Key;
+
+                X509CertificateEntry[] ce = pk12.GetCertificateChain(alias);
+                Org.BouncyCastle.X509.X509Certificate[] chain = new Org.BouncyCastle.X509.X509Certificate[ce.Length];
+                for (int k = 0; k < ce.Length; ++k)
+                {
+                    chain[k] = ce[k].Certificate;
+                }
+
+                PdfReader PDFReaderSign = new PdfReader(PDFPath);
+                PdfSigner signer = new PdfSigner(PDFReaderSign, new FileStream(frmSign.txtPDFOutput.Text, FileMode.Create), new StampingProperties());
+
+                // Create the signature appearance
+                iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(x1pdf, y1pdf, x2pdf - x1pdf, y2pdf - y1pdf);
+                PdfSignatureAppearance appearance = signer.GetSignatureAppearance();
+                appearance
+                    .SetReason(frmSign.txtReason.Text)
+                    .SetLocation(frmSign.txtLocation.Text)
+                    .SetContact(frmSign.txtContactInfo.Text)
+                    .SetSignatureCreator(frmSign.txtName.Text)
+                    .SetImage(ImageDataFactory.Create(frmSign.picSign.Image, Color.Transparent))
+                    .SetImageScale(CalculateZoomToFit(frmSign.picSign.Image, rect))
+                    .SetPageRect(rect)
+                    .SetPageNumber(PageCurrent);
+
+                signer.SetSignDate(DateTime.Now);
+                signer.SetFieldName("sig");
+
+                IExternalSignature pks = new PrivateKeySignature(pk, DigestAlgorithms.SHA256);
+
+                ITSAClient tsaClient = new TSAClientBouncyCastle(frmSign.txtTimestampServer.Text, "", "", 8192, "SHA-256");
+                signer.SignDetached(pks, chain, null, null, tsaClient, 8192, PdfSigner.CryptoStandard.CMS);
+
+                MessageBox.Show("Signed PDF saved at " + frmSign.txtPDFOutput.Text, "PDFeSignHandwritten", MessageBoxButtons.OK);
+                Process.Start(frmSign.txtPDFOutput.Text);
+
+                //reset variables
+                X1 = Y1 = X2 = Y2 = -1;
+                PDFDocument.Close();
+                PDFDocument = null;
+                PDFReader.Close();
+                PDFReader = null;
+                PDFReaderSign.Close();
+                PDFPath = "";
+                if (picPDF.Image != null)
+                {
+                    picPDF.Image.Dispose();
+                    picPDF.Image = null;
+                }
+                lblPageInfo.Text = "";
+                signingArea = new Rectangle();
             }
-            ICipherParameters pk = pk12.GetKey(alias).Key;
 
-            X509CertificateEntry[] ce = pk12.GetCertificateChain(alias);
-            Org.BouncyCastle.X509.X509Certificate[] chain = new Org.BouncyCastle.X509.X509Certificate[ce.Length];
-            for (int k = 0; k < ce.Length; ++k)
-            {
-                chain[k] = ce[k].Certificate;
-            }
-
-            PdfReader PDFReaderSign = new PdfReader(PDFPath);
-            PdfSigner signer = new PdfSigner(PDFReaderSign, new FileStream(frmSign.txtPDFOutput.Text, FileMode.Create), new StampingProperties());
-
-            // Create the signature appearance
-            iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(x1pdf, y1pdf, x2pdf-x1pdf, y2pdf-y1pdf);
-            PdfSignatureAppearance appearance = signer.GetSignatureAppearance();
-            appearance
-                .SetReason(frmSign.txtReason.Text)
-                .SetLocation(frmSign.txtLocation.Text)
-                .SetContact(frmSign.txtContactInfo.Text)
-                .SetSignatureCreator(frmSign.txtName.Text)
-                .SetImage(ImageDataFactory.Create(frmSign.picSign.Image, Color.Transparent))
-                .SetImageScale(CalculateZoomToFit(frmSign.picSign.Image, rect))
-                .SetPageRect(rect)
-                .SetPageNumber(PageCurrent);
-                
-            signer.SetSignDate(DateTime.Now);
-            signer.SetFieldName("sig");
-
-            IExternalSignature pks = new PrivateKeySignature(pk, DigestAlgorithms.SHA256);
-
-            ITSAClient tsaClient = new TSAClientBouncyCastle(frmSign.txtTimestampServer.Text, "", "", 8192, "SHA-256");
-            signer.SignDetached(pks, chain, null, null, tsaClient, 8192, PdfSigner.CryptoStandard.CMS);
-
-            MessageBox.Show("Signed PDF saved at " + frmSign.txtPDFOutput.Text, "PDFeSignHandwritten", MessageBoxButtons.OK);
-            Process.Start(frmSign.txtPDFOutput.Text);
-
-            //reset variables
-            X1 = Y1 = X2 = Y2 = -1;
-            PDFDocument.Close();
-            PDFDocument = null;
-            PDFReader.Close();
-            PDFReader = null;
-            PDFReaderSign.Close();
-            PDFPath = "";
-            if (picPDF.Image != null)
-            {
-                picPDF.Image.Dispose();
-                picPDF.Image = null;
-            }
-            lblPageInfo.Text = "";
-            signingArea = new Rectangle();
             frmSign.Dispose();
             frmSign = null;
-
+    
             Cursor = Cursors.Default;
         }
 

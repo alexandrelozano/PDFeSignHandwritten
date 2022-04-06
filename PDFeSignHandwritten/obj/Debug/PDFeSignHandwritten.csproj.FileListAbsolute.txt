@@ -401,3 +401,11 @@ C:\Users\alexa\source\repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\Sy
 C:\Users\alexa\source\repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\alexa\source\repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\alexa\source\repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.ValueTuple.xml
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Security.AccessControl.dll
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Security.Permissions.dll
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Security.AccessControl.xml
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Security.Permissions.xml
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Debug\System.Security.Principal.Windows.xml

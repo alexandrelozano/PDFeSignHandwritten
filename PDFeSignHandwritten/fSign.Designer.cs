@@ -68,7 +68,6 @@ namespace PDFeSignHandwritten
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(172, 20);
             this.txtName.TabIndex = 5;
-            this.txtName.Text = "Digitally signed by somebody";
             // 
             // txtLocation
             // 
@@ -76,7 +75,6 @@ namespace PDFeSignHandwritten
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(172, 20);
             this.txtLocation.TabIndex = 7;
-            this.txtLocation.Text = "New york";
             // 
             // label2
             // 
@@ -93,7 +91,6 @@ namespace PDFeSignHandwritten
             this.txtReason.Name = "txtReason";
             this.txtReason.Size = new System.Drawing.Size(172, 20);
             this.txtReason.TabIndex = 9;
-            this.txtReason.Text = "Ensure authenticity";
             // 
             // label3
             // 
@@ -110,7 +107,6 @@ namespace PDFeSignHandwritten
             this.txtContactInfo.Name = "txtContactInfo";
             this.txtContactInfo.Size = new System.Drawing.Size(172, 20);
             this.txtContactInfo.TabIndex = 11;
-            this.txtContactInfo.Text = "+34 987654321";
             // 
             // label4
             // 
@@ -224,7 +220,6 @@ namespace PDFeSignHandwritten
             this.txtTimestampServer.Name = "txtTimestampServer";
             this.txtTimestampServer.Size = new System.Drawing.Size(172, 20);
             this.txtTimestampServer.TabIndex = 21;
-            this.txtTimestampServer.Text = "https://freetsa.org/tsr";
             // 
             // label8
             // 

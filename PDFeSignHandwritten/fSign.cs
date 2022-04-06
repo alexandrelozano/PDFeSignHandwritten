@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace PDFeSignHandwritten
 {
@@ -17,12 +18,36 @@ namespace PDFeSignHandwritten
         Point lastPoint = Point.Empty;
         bool isMouseDown;
 
+        public bool sign;
+
         public fSign()
         {
             InitializeComponent();
 
             Bitmap bmp = new Bitmap(picSign.Width, picSign.Height);
             picSign.Image = bmp;
+
+            txtName.Text = ConfigurationManager.AppSettings["Name"];
+            txtContactInfo.Text = ConfigurationManager.AppSettings["ContactInfo"];
+            txtLocation.Text = ConfigurationManager.AppSettings["Location"];
+            txtReason.Text = ConfigurationManager.AppSettings["Reason"];
+            txtCertificate.Text = ConfigurationManager.AppSettings["Certificate"];
+            txtCertificatePassword.Text = ConfigurationManager.AppSettings["CertificatePassword"];
+            txtTimestampServer.Text = ConfigurationManager.AppSettings["TimestampServer"];
+            txtPDFOutput.Text = ConfigurationManager.AppSettings["PDFOutput"];
+
+            if (txtCertificate.Text == "")
+            {
+                txtCertificate.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "sample.p12");
+                txtCertificatePassword.Text = "sample";
+            }
+
+            if (txtPDFOutput.Text == "")
+            {
+                txtPDFOutput.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "out.pdf");
+            }
+
+            sign = false;
         }
 
         private void picSign_MouseDown(object sender, MouseEventArgs e)
@@ -56,6 +81,16 @@ namespace PDFeSignHandwritten
 
         private void bttSign_Click(object sender, EventArgs e)
         {
+            ConfigurationManager.AppSettings["Name"] = txtName.Text;
+            ConfigurationManager.AppSettings["ContactInfo"] = txtContactInfo.Text;
+            ConfigurationManager.AppSettings["Location"] = txtLocation.Text;
+            ConfigurationManager.AppSettings["Reason"] = txtReason.Text;
+            ConfigurationManager.AppSettings["Certificate"] = txtCertificate.Text;
+            ConfigurationManager.AppSettings["CertificatePassword"] = txtCertificatePassword.Text;
+            ConfigurationManager.AppSettings["TimestampServer"] = txtTimestampServer.Text;
+            ConfigurationManager.AppSettings["PDFOutput"] = txtPDFOutput.Text;
+
+            sign = true;
             this.Hide();
         }
 
