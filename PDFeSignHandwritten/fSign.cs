@@ -39,7 +39,7 @@ namespace PDFeSignHandwritten
                 {
                     using (Graphics g = Graphics.FromImage(picSign.Image))
                     {
-                        g.DrawLine(new Pen(Color.Black, 2), lastPoint, e.Location);
+                        g.DrawLine(new Pen(Color.Blue, 2), lastPoint, e.Location);
                         g.SmoothingMode = SmoothingMode.AntiAlias;
                     }
                     picSign.Invalidate();
@@ -92,5 +92,6 @@ namespace PDFeSignHandwritten
                 txtCertificate.Text = saveFileDialog1.FileName;
             }
         }
+
     }
 }

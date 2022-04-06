@@ -85,7 +85,7 @@ namespace PDFeSignHandwritten
             System.Drawing.Image img = System.Drawing.Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "out.jpg"));
             picPDF.Image = img;
 
-            lblPageInfo.Text = string.Format("{0} / {1}", PageCurrent, 10);
+            lblPageInfo.Text = string.Format("{0} / {1}", PageCurrent, PDFDocument.GetNumberOfPages());
         }
 
         private void GhostScriptConvertPage(int PageNumber)
@@ -225,6 +225,8 @@ namespace PDFeSignHandwritten
                 return;
             }
 
+            Cursor = Cursors.WaitCursor;
+
             if (frmSign == null) frmSign = new fSign();
             frmSign.txtPDFOutput.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "out.pdf");
             frmSign.txtCertificate.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "sample.p12");
@@ -286,7 +288,7 @@ namespace PDFeSignHandwritten
                 .SetLocation(frmSign.txtLocation.Text)
                 .SetContact(frmSign.txtContactInfo.Text)
                 .SetSignatureCreator(frmSign.txtName.Text)
-                .SetImage(ImageDataFactory.Create(frmSign.picSign.Image, Color.White))
+                .SetImage(ImageDataFactory.Create(frmSign.picSign.Image, Color.Transparent))
                 .SetImageScale(CalculateZoomToFit(frmSign.picSign.Image, rect))
                 .SetPageRect(rect)
                 .SetPageNumber(PageCurrent);
@@ -319,6 +321,7 @@ namespace PDFeSignHandwritten
             signingArea = new Rectangle();
             frmSign.Dispose();
             frmSign = null;
+
             Cursor = Cursors.Default;
         }
 
