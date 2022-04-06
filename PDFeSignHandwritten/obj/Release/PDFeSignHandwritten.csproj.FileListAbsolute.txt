@@ -401,3 +401,11 @@ C:\Users\alexa\source\repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\
 C:\Users\alexa\source\repos\PDFeSignHandwritten\PDFeSignHandwritten\obj\Release\PDFeSignHandwritten.csproj.CopyComplete
 C:\Users\alexa\source\repos\PDFeSignHandwritten\PDFeSignHandwritten\obj\Release\PDFeSignHandwritten.exe
 C:\Users\alexa\source\repos\PDFeSignHandwritten\PDFeSignHandwritten\obj\Release\PDFeSignHandwritten.pdb
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\System.Configuration.ConfigurationManager.dll
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\System.Security.AccessControl.dll
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\System.Security.Permissions.dll
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\System.Security.Principal.Windows.dll
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\System.Configuration.ConfigurationManager.xml
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\System.Security.AccessControl.xml
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\System.Security.Permissions.xml
+C:\Users\alexa\Source\Repos\PDFeSignHandwritten\PDFeSignHandwritten\bin\Release\System.Security.Principal.Windows.xml
