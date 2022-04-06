@@ -1,9 +1,0 @@
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\bin\Debug\PdfSharp-gdi.dll
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\bin\Debug\PdfSharp-gdi.pdb
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\obj\Debug\PdfSharp-gdi.csproj.AssemblyReference.cache
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\obj\Debug\PdfSharp.Forms.PagePreview.resources
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\obj\Debug\PdfSharp.Forms.PagePreviewCanvas.resources
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\obj\Debug\PdfSharp-gdi.csproj.GenerateResource.cache
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\obj\Debug\PdfSharp-gdi.csproj.CoreCompileInputs.cache
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\obj\Debug\PdfSharp-gdi.dll
-C:\Users\alexa\source\repos\PDFeSignHandwritten\PdfSharp-gdi\obj\Debug\PdfSharp-gdi.pdb
