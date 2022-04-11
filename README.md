@@ -13,16 +13,18 @@ Download windows portable version [PDFeSignHandwritten v1.5](https://raw.githubu
 
 ### Command line parameters
 
--pdf 					[path]		 	PDF file to open
--name 					[name]		 	Sign name info
--contactinfo 			[contactinfo]	Sign contact info
--location 				[location]	 	Sign location info
--reason 				[reason]		Sign reason info
--certificate 			[certificate]	Certificate info
--certificatepassword 	[password]	 	Certificate password
--timestampserver 		[URL]		 	Timestamp server URL
--pdfoutput 				[path]		 	Signed PDF output path
--help 									show this help
+| Parameter  | Value | Description |
+| ---   | ---         | ---     |
+| pdf | [path] | PDF file to open |
+| name | [name] | Sign name info |
+| contactinfo | [contactinfo] |	Sign contact info |
+| location | [location] | Sign location info |
+| reason | [reason] | Sign reason info |
+| certificate | [certificate] |	Certificate path |
+| certificatepassword | [password] | Certificate password |
+| timestampserver | [URL] | Timestamp server URL |
+| pdfoutput | [path] | Signed PDF output path |
+| help | | Show help |
 
 ## Changelog
 
