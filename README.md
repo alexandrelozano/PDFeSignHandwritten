@@ -11,8 +11,23 @@ Download windows portable version [PDFeSignHandwritten v1.4](https://raw.githubu
 
 ![Sample](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/PDFeSignHandwritten/samples/PDFeSignHandwritten.gif)
 
+### Command line parameters
+
+-pdf 					[path]		 	PDF file to open
+-name 					[name]		 	Sign name info
+-contactinfo 			[contactinfo]	Sign contact info
+-location 				[location]	 	Sign location info
+-reason 				[reason]		Sign reason info
+-certificate 			[certificate]	Certificate info
+-certificatepassword 	[password]	 	Certificate password
+-timestampserver 		[URL]		 	Timestamp server URL
+-pdfoutput 				[path]		 	Signed PDF output path
+-help 									show this help
+
 ## Changelog
 
+### V1.5 
+Application accepts command line parameters
 ### V1.4 
 Uses iText 7 to create the digital signature
 ### V1.3 

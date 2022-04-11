@@ -26,6 +26,8 @@ namespace PDFeSignHandwritten
 {
     public partial class fMain : Form
     {
+        public string PDFPathToOpenAtStart = "";
+
         PdfReader PDFReader;
         PdfDocument PDFDocument;
         private string PDFPath;
@@ -336,6 +338,20 @@ namespace PDFeSignHandwritten
                  ? targetPanel.GetHeight() / image.Height
                  : targetPanel.GetWidth() / image.Width
                  ;
+        }
+
+        private void fMain_Shown(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(PDFPathToOpenAtStart))
+            {
+                Cursor = Cursors.WaitCursor;
+                PDFPath = PDFPathToOpenAtStart;
+                PDFReader = new PdfReader(PDFPath);
+                PDFDocument = new PdfDocument(PDFReader);
+                Cursor = Cursors.Default;
+                PageCurrent = 1;
+                ShowPage();
+            }
         }
     }
 }

@@ -123,6 +123,7 @@ namespace PDFeSignHandwritten
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF handwritten eSign";
+            this.Shown += new System.EventHandler(this.fMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.picPDF)).EndInit();
             this.ResumeLayout(false);
 
