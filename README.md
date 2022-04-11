@@ -20,7 +20,7 @@ Download windows portable version [PDFeSignHandwritten v1.5](https://raw.githubu
 | contactinfo | [contactinfo] |	Sign contact info |
 | location | [location] | Sign location info |
 | reason | [reason] | Sign reason info |
-| certificate | [certificate] |	Certificate info |
+| certificate | [certificate] |	Certificate path |
 | certificatepassword | [password] | Certificate password |
 | timestampserver | [URL] | Timestamp server URL |
 | pdfoutput | [path] | Signed PDF output path |
