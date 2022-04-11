@@ -86,7 +86,7 @@ namespace PDFeSignHandwritten
                     helpMessage += "-contactinfo \t\t[contactinfo]\t Sign contact info\n";
                     helpMessage += "-location \t\t[location]\t Sign location info\n";
                     helpMessage += "-reason \t\t\t[reason]\t\t Sign reason info\n";
-                    helpMessage += "-certificate \t\t[certificate]\t Certificate info\n";
+                    helpMessage += "-certificate \t\t[certificate]\t Certificate path\n";
                     helpMessage += "-certificatepassword \t[password]\t Certificate password\n";
                     helpMessage += "-timestampserver \t\t[URL]\t\t Timestamp server URL\n";
                     helpMessage += "-pdfoutput \t\t[path]\t\t Signed PDF output path\n";
