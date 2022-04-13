@@ -7,7 +7,7 @@ Uses the [GhostScript](https://www.ghostscript.com/) interpreter portable editio
 
 Uses the [iText 7](https://itextpdf.com/es/products/itext-7/itext-7-community) library to create the digital signature.
 
-Download windows portable version [PDFeSignHandwritten v1.5](https://github.com/alexandrelozano/PDFeSignHandwritten/releases/download/v1.5/PDFeSignHandwritten_v1.5.zip)
+Download windows portable version [PDFeSignHandwritten v1.5.1](https://github.com/alexandrelozano/PDFeSignHandwritten/releases/download/v1.5.1/PDFeSignHandwritten_v1.5.1.zip)
 
 ![Sample](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/PDFeSignHandwritten/samples/PDFeSignHandwritten.gif)
 
@@ -28,13 +28,16 @@ Download windows portable version [PDFeSignHandwritten v1.5](https://github.com/
 
 ## Changelog
 
-### V1.5 
-Application accepts command line parameters
-### V1.4 
-Uses iText 7 to create the digital signature
-### V1.3 
-Uses PDFSharp to create the digital signature
-### V1.2 
-Uses GhostScript to render the PDF
-### V1.0 
-Uses Free Spire.PDF to render and create the digital signature
+### v1.5.1
+- Transparent signature image
+- Signature text improvements
+### v1.5 
+- Application accepts command line parameters
+### v1.4 
+- Uses iText 7 to create the digital signature
+### v1.3 
+- Uses PDFSharp to create the digital signature
+### v1.2 
+- Uses GhostScript to render the PDF
+### v1.0 
+- Uses Free Spire.PDF to render and create the digital signature
