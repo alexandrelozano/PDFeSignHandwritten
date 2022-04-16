@@ -47,7 +47,42 @@ namespace PDFeSignHandwritten
                 txtPDFOutput.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples", "out.pdf");
             }
 
+            cboPenColor.DataSource = typeof(Color).GetProperties()
+                .Where(x => x.PropertyType == typeof(Color))
+                .Select(x => x.GetValue(null)).ToList();
+            cboPenColor.MaxDropDownItems = 10;
+            cboPenColor.IntegralHeight = false;
+            cboPenColor.DrawMode = DrawMode.OwnerDrawFixed;
+            cboPenColor.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboPenColor.DrawItem += cboPen_DrawItem;
+
+            for (int i = 0; i < cboPenColor.Items.Count - 1; i++)
+            {
+                Color c = (Color)cboPenColor.Items[i];
+                if (c.Name == "Blue")
+                    cboPenColor.SelectedIndex = i;
+            }
+
             sign = false;
+        }
+
+        private void cboPen_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.Index >= 0)
+            {
+                var txt = cboPenColor.GetItemText(cboPenColor.Items[e.Index]);
+                var color = (Color)cboPenColor.Items[e.Index];
+                var r1 = new Rectangle(e.Bounds.Left + 1, e.Bounds.Top + 1,
+                    2 * (e.Bounds.Height - 2), e.Bounds.Height - 2);
+                var r2 = Rectangle.FromLTRB(r1.Right + 2, e.Bounds.Top,
+                    e.Bounds.Right, e.Bounds.Bottom);
+                using (var b = new SolidBrush(color))
+                    e.Graphics.FillRectangle(b, r1);
+                e.Graphics.DrawRectangle(Pens.Black, r1);
+                TextRenderer.DrawText(e.Graphics, txt, cboPenColor.Font, r2,
+                    cboPenColor.ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+            }
         }
 
         private void picSign_MouseDown(object sender, MouseEventArgs e)
@@ -64,7 +99,10 @@ namespace PDFeSignHandwritten
                 {
                     using (Graphics g = Graphics.FromImage(picSign.Image))
                     {
-                        g.DrawLine(new Pen(Color.Blue, 2), lastPoint, e.Location);
+                        Color c = Color.Blue;
+                        if (cboPenColor.SelectedIndex >= 0)
+                            c = (Color)cboPenColor.SelectedValue;
+                        g.DrawLine(new Pen(c, 2), lastPoint, e.Location);
                         g.SmoothingMode = SmoothingMode.AntiAlias;
                     }
                     picSign.Invalidate();

@@ -51,6 +51,8 @@ namespace PDFeSignHandwritten
             this.bttLoadImage = new System.Windows.Forms.Button();
             this.picSign = new System.Windows.Forms.PictureBox();
             this.bttSign = new System.Windows.Forms.Button();
+            this.cboPenColor = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             this.SuspendLayout();
             // 
@@ -244,11 +246,31 @@ namespace PDFeSignHandwritten
             this.bttSign.UseVisualStyleBackColor = true;
             this.bttSign.Click += new System.EventHandler(this.bttSign_Click);
             // 
+            // cboPenColor
+            // 
+            this.cboPenColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPenColor.FormattingEnabled = true;
+            this.cboPenColor.Location = new System.Drawing.Point(252, 384);
+            this.cboPenColor.Name = "cboPenColor";
+            this.cboPenColor.Size = new System.Drawing.Size(120, 21);
+            this.cboPenColor.TabIndex = 23;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(191, 387);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Pen color:";
+            // 
             // fSign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 421);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.cboPenColor);
             this.Controls.Add(this.bttLoadImage);
             this.Controls.Add(this.txtTimestampServer);
             this.Controls.Add(this.label8);
@@ -303,5 +325,7 @@ namespace PDFeSignHandwritten
         public System.Windows.Forms.TextBox txtTimestampServer;
         private System.Windows.Forms.Label label8;
         internal System.Windows.Forms.Button bttLoadImage;
+        private System.Windows.Forms.ComboBox cboPenColor;
+        private System.Windows.Forms.Label label9;
     }
 }
