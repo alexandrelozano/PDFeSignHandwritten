@@ -54,7 +54,7 @@ namespace PDFeSignHandwritten
             cboPenColor.IntegralHeight = false;
             cboPenColor.DrawMode = DrawMode.OwnerDrawFixed;
             cboPenColor.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboPenColor.DrawItem += cboPen_DrawItem;
+            cboPenColor.DrawItem += cboPenColor_DrawItem;
 
             for (int i = 0; i < cboPenColor.Items.Count - 1; i++)
             {
@@ -63,10 +63,31 @@ namespace PDFeSignHandwritten
                     cboPenColor.SelectedIndex = i;
             }
 
+            for (int i = 1; i <= 10; i++)
+            {
+                cboPenWidth.Items.Add(i);
+            }
+            cboPenWidth.SelectedIndex = 1;
+            cboPenWidth.DrawMode = DrawMode.OwnerDrawFixed;
+            cboPenWidth.DrawItem += cboPenWidthOnDrawItem;
+
             sign = false;
         }
 
-        private void cboPen_DrawItem(object sender, DrawItemEventArgs e)
+        private void cboPenWidthOnDrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.Index >= 0)
+            {
+                Point p1 = new Point(e.Bounds.Left + 5, e.Bounds.Y + 5);
+                Point p2 = new Point(e.Bounds.Right - 5, e.Bounds.Y + 5);
+
+                using (Pen SolidmyPen = new Pen(e.ForeColor, (int)cboPenWidth.Items[e.Index]))
+                    e.Graphics.DrawLine(SolidmyPen, p1, p2);
+            }
+        }
+
+        private void cboPenColor_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
             if (e.Index >= 0)
@@ -102,7 +123,7 @@ namespace PDFeSignHandwritten
                         Color c = Color.Blue;
                         if (cboPenColor.SelectedIndex >= 0)
                             c = (Color)cboPenColor.SelectedValue;
-                        g.DrawLine(new Pen(c, 2), lastPoint, e.Location);
+                        g.DrawLine(new Pen(c, (int)cboPenWidth.SelectedItem), lastPoint, e.Location);
                         g.SmoothingMode = SmoothingMode.AntiAlias;
                     }
                     picSign.Invalidate();

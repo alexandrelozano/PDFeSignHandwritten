@@ -53,6 +53,8 @@ namespace PDFeSignHandwritten
             this.bttSign = new System.Windows.Forms.Button();
             this.cboPenColor = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cboPenWidth = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             this.SuspendLayout();
             // 
@@ -264,11 +266,31 @@ namespace PDFeSignHandwritten
             this.label9.TabIndex = 24;
             this.label9.Text = "Pen color:";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(378, 387);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(55, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Pen color:";
+            // 
+            // cboPenWidth
+            // 
+            this.cboPenWidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPenWidth.FormattingEnabled = true;
+            this.cboPenWidth.Location = new System.Drawing.Point(439, 384);
+            this.cboPenWidth.Name = "cboPenWidth";
+            this.cboPenWidth.Size = new System.Drawing.Size(98, 21);
+            this.cboPenWidth.TabIndex = 25;
+            // 
             // fSign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 421);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.cboPenWidth);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cboPenColor);
             this.Controls.Add(this.bttLoadImage);
@@ -327,5 +349,7 @@ namespace PDFeSignHandwritten
         internal System.Windows.Forms.Button bttLoadImage;
         private System.Windows.Forms.ComboBox cboPenColor;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cboPenWidth;
     }
 }
