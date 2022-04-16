@@ -1171,6 +1171,7 @@
     <Content Include="Ghostscript\bin\gswin32c.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\picture_import.gif" />
     <Content Include="samples\PDFeSignHandwritten.gif" />
   </ItemGroup>
   <ItemGroup>

@@ -46,10 +46,11 @@ namespace PDFeSignHandwritten
             this.txtCertificate = new System.Windows.Forms.TextBox();
             this.txtCertificatePassword = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.picSign = new System.Windows.Forms.PictureBox();
-            this.bttSign = new System.Windows.Forms.Button();
             this.txtTimestampServer = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.bttLoadImage = new System.Windows.Forms.Button();
+            this.picSign = new System.Windows.Forms.PictureBox();
+            this.bttSign = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             this.SuspendLayout();
             // 
@@ -186,6 +187,35 @@ namespace PDFeSignHandwritten
             this.label7.TabIndex = 18;
             this.label7.Text = "Certificate password:";
             // 
+            // txtTimestampServer
+            // 
+            this.txtTimestampServer.Location = new System.Drawing.Point(543, 303);
+            this.txtTimestampServer.Name = "txtTimestampServer";
+            this.txtTimestampServer.Size = new System.Drawing.Size(172, 20);
+            this.txtTimestampServer.TabIndex = 21;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(544, 287);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(93, 13);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Timestamp server:";
+            // 
+            // bttLoadImage
+            // 
+            this.bttLoadImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bttLoadImage.Image = global::PDFeSignHandwritten.Properties.Resources.picture_import;
+            this.bttLoadImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bttLoadImage.Location = new System.Drawing.Point(12, 378);
+            this.bttLoadImage.Name = "bttLoadImage";
+            this.bttLoadImage.Size = new System.Drawing.Size(173, 31);
+            this.bttLoadImage.TabIndex = 22;
+            this.bttLoadImage.Text = "Load image from file...";
+            this.bttLoadImage.UseVisualStyleBackColor = true;
+            this.bttLoadImage.Click += new System.EventHandler(this.bttLoadImage_Click);
+            // 
             // picSign
             // 
             this.picSign.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -206,35 +236,20 @@ namespace PDFeSignHandwritten
             this.bttSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bttSign.Image = global::PDFeSignHandwritten.Properties.Resources.pencil;
             this.bttSign.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bttSign.Location = new System.Drawing.Point(313, 378);
+            this.bttSign.Location = new System.Drawing.Point(543, 378);
             this.bttSign.Name = "bttSign";
-            this.bttSign.Size = new System.Drawing.Size(97, 31);
+            this.bttSign.Size = new System.Drawing.Size(173, 31);
             this.bttSign.TabIndex = 2;
             this.bttSign.Text = "Sign";
             this.bttSign.UseVisualStyleBackColor = true;
             this.bttSign.Click += new System.EventHandler(this.bttSign_Click);
-            // 
-            // txtTimestampServer
-            // 
-            this.txtTimestampServer.Location = new System.Drawing.Point(543, 303);
-            this.txtTimestampServer.Name = "txtTimestampServer";
-            this.txtTimestampServer.Size = new System.Drawing.Size(172, 20);
-            this.txtTimestampServer.TabIndex = 21;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(544, 287);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 13);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Timestamp server:";
             // 
             // fSign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 421);
+            this.Controls.Add(this.bttLoadImage);
             this.Controls.Add(this.txtTimestampServer);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtCertificatePassword);
@@ -287,5 +302,6 @@ namespace PDFeSignHandwritten
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.TextBox txtTimestampServer;
         private System.Windows.Forms.Label label8;
+        internal System.Windows.Forms.Button bttLoadImage;
     }
 }
