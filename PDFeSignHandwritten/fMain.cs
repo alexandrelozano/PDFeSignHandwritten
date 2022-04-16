@@ -281,16 +281,24 @@ namespace PDFeSignHandwritten
 
                 PdfReader PDFReaderSign = new PdfReader(PDFPath);
                 PdfSigner signer = new PdfSigner(PDFReaderSign, new FileStream(frmSign.txtPDFOutput.Text, FileMode.Create), new StampingProperties());
-
+                
                 // Create the signature appearance
                 iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(x1pdf, y1pdf, x2pdf - x1pdf, y2pdf - y1pdf);
+                ImageData imgSign=ImageDataFactory.Create(frmSign.picSign.Image, null);
+                string signText = "Name: " + frmSign.txtName.Text + "\n";
+                signText += "Location: " + frmSign.txtLocation.Text + "\n";
+                signText += "Reason: " + frmSign.txtReason.Text + "\n";
+                signText += "Contact info: " + frmSign.txtContactInfo.Text + "\n";
+                signText += "Date: " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + "\n";
+                
                 PdfSignatureAppearance appearance = signer.GetSignatureAppearance();
                 appearance
                     .SetReason(frmSign.txtReason.Text)
                     .SetLocation(frmSign.txtLocation.Text)
                     .SetContact(frmSign.txtContactInfo.Text)
                     .SetSignatureCreator(frmSign.txtName.Text)
-                    .SetImage(ImageDataFactory.Create(frmSign.picSign.Image, Color.Transparent))
+                    .SetLayer2Text(signText)
+                    .SetImage(imgSign)
                     .SetImageScale(CalculateZoomToFit(frmSign.picSign.Image, rect))
                     .SetPageRect(rect)
                     .SetPageNumber(PageCurrent);
