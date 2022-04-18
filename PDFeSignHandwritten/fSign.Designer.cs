@@ -256,6 +256,7 @@ namespace PDFeSignHandwritten
             this.cboPenColor.Name = "cboPenColor";
             this.cboPenColor.Size = new System.Drawing.Size(120, 21);
             this.cboPenColor.TabIndex = 23;
+            this.cboPenColor.SelectedValueChanged += new System.EventHandler(this.cboPenColor_SelectedValueChanged);
             // 
             // label9
             // 
@@ -283,6 +284,7 @@ namespace PDFeSignHandwritten
             this.cboPenWidth.Name = "cboPenWidth";
             this.cboPenWidth.Size = new System.Drawing.Size(98, 21);
             this.cboPenWidth.TabIndex = 25;
+            this.cboPenWidth.SelectedIndexChanged += new System.EventHandler(this.cboPenWidth_SelectedIndexChanged);
             // 
             // fSign
             // 

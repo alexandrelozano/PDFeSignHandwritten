@@ -15,8 +15,9 @@ namespace PDFeSignHandwritten
 {
     public partial class fSign : Form
     {
-        Point lastPoint = Point.Empty;
+        List<List<Point>> lstPoints = new List<List<Point>>();
         bool isMouseDown;
+        Pen pen;
 
         public bool sign;
 
@@ -56,11 +57,15 @@ namespace PDFeSignHandwritten
             cboPenColor.DropDownStyle = ComboBoxStyle.DropDownList;
             cboPenColor.DrawItem += cboPenColor_DrawItem;
 
+            Color c = (Color)cboPenColor.Items[0];
             for (int i = 0; i < cboPenColor.Items.Count - 1; i++)
             {
-                Color c = (Color)cboPenColor.Items[i];
+                c = (Color)cboPenColor.Items[i];
                 if (c.Name == "Blue")
+                {
                     cboPenColor.SelectedIndex = i;
+                    break;
+                }
             }
 
             for (int i = 1; i <= 10; i++)
@@ -70,6 +75,8 @@ namespace PDFeSignHandwritten
             cboPenWidth.SelectedIndex = 1;
             cboPenWidth.DrawMode = DrawMode.OwnerDrawFixed;
             cboPenWidth.DrawItem += cboPenWidthOnDrawItem;
+
+            AdjustPen();
 
             sign = false;
         }
@@ -108,7 +115,7 @@ namespace PDFeSignHandwritten
 
         private void picSign_MouseDown(object sender, MouseEventArgs e)
         {
-            lastPoint = e.Location;
+            lstPoints.Add(new List<Point>());
             isMouseDown = true;
         }
 
@@ -116,18 +123,16 @@ namespace PDFeSignHandwritten
         {
             if (isMouseDown)
             {
-                if (lastPoint != Point.Empty)
+                if (e.Location != Point.Empty)
                 {
+                    lstPoints.Last().Add(e.Location);
+                
                     using (Graphics g = Graphics.FromImage(picSign.Image))
                     {
-                        Color c = Color.Blue;
-                        if (cboPenColor.SelectedIndex >= 0)
-                            c = (Color)cboPenColor.SelectedValue;
-                        g.DrawLine(new Pen(c, (int)cboPenWidth.SelectedItem), lastPoint, e.Location);
-                        g.SmoothingMode = SmoothingMode.AntiAlias;
+                        if (lstPoints.Last().Count>1)
+                            g.DrawCurve(pen, lstPoints.Last().ToArray());
                     }
                     picSign.Invalidate();
-                    lastPoint = e.Location;
                 }
             }
         }
@@ -135,7 +140,6 @@ namespace PDFeSignHandwritten
         private void picSign_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
-            lastPoint = Point.Empty;
         }
 
         private void bttSign_Click(object sender, EventArgs e)
@@ -225,6 +229,22 @@ namespace PDFeSignHandwritten
             g.Dispose();
 
             pbox.Image = resized;
+        }
+
+        private void AdjustPen()
+        {
+            if (cboPenColor.SelectedItem != null && cboPenWidth.SelectedItem != null)
+                pen = new Pen((Color)cboPenColor.SelectedItem, (int)cboPenWidth.SelectedItem);
+        }
+
+        private void cboPenWidth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AdjustPen();
+        }
+
+        private void cboPenColor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            AdjustPen();
         }
     }
 }
