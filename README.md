@@ -7,7 +7,7 @@ Uses the [GhostScript](https://www.ghostscript.com/) interpreter portable editio
 
 Uses the [iText 7](https://itextpdf.com/es/products/itext-7/itext-7-community) library to create the digital signature.
 
-Download windows portable version [PDFeSignHandwritten v1.5.2](https://github.com/alexandrelozano/PDFeSignHandwritten/releases/download/v1.5.1/PDFeSignHandwritten_v1.5.2.zip)
+Download windows portable version [PDFeSignHandwritten v1.5.2](https://github.com/alexandrelozano/PDFeSignHandwritten/releases/download/v1.5.2/PDFeSignHandwritten_v1.5.2.zip)
 
 ![Sample](https://raw.githubusercontent.com/alexandrelozano/PDFeSignHandwritten/main/PDFeSignHandwritten/samples/PDFeSignHandwritten.gif)
 
