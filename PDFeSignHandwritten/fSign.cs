@@ -36,6 +36,9 @@ namespace PDFeSignHandwritten
             txtCertificatePassword.Text = ConfigurationManager.AppSettings["CertificatePassword"];
             txtTimestampServer.Text = ConfigurationManager.AppSettings["TimestampServer"];
             txtPDFOutput.Text = ConfigurationManager.AppSettings["PDFOutput"];
+            bool tmp;
+            bool.TryParse(ConfigurationManager.AppSettings["OpenPDFAfterSign"], out tmp);
+            chkOpenPDFAfterSign.Checked = tmp;
 
             if (txtCertificate.Text == "")
             {
@@ -152,6 +155,7 @@ namespace PDFeSignHandwritten
             ConfigurationManager.AppSettings["CertificatePassword"] = txtCertificatePassword.Text;
             ConfigurationManager.AppSettings["TimestampServer"] = txtTimestampServer.Text;
             ConfigurationManager.AppSettings["PDFOutput"] = txtPDFOutput.Text;
+            ConfigurationManager.AppSettings["OpenPDFAfterSign"] = chkOpenPDFAfterSign.Checked.ToString();
 
             sign = true;
             this.Hide();

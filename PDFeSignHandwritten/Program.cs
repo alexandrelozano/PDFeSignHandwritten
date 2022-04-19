@@ -39,6 +39,9 @@ namespace PDFeSignHandwritten
             [Option('o', "pdfoutput", Required = false, HelpText = "Signed PDF output path.")]
             public string PDFOutput { get; set; }
 
+            [Option('a', "openpdfaftersign", Required = false, HelpText = "Open PDF after sign.")]
+            public string OpenPDFAfterSign { get; set; }
+
             [Option('h', "help", Required = false, HelpText = "Show command line parameters.")]
             public bool help { get; set; }
         }
@@ -77,6 +80,7 @@ namespace PDFeSignHandwritten
                 if (!string.IsNullOrEmpty(o.CertificatePassword)) ConfigurationManager.AppSettings["CertificatePassword"] = o.Name;
                 if (!string.IsNullOrEmpty(o.TimestampServer)) ConfigurationManager.AppSettings["TimestampServer"] = o.Name;
                 if (!string.IsNullOrEmpty(o.PDFOutput)) ConfigurationManager.AppSettings["PDFOutput"] = o.Name;
+                if (!string.IsNullOrEmpty(o.OpenPDFAfterSign)) ConfigurationManager.AppSettings["OpenPDFAfterSign"] = o.Name;
 
                 if (o.help)
                 {
@@ -90,6 +94,7 @@ namespace PDFeSignHandwritten
                     helpMessage += "-certificatepassword \t[password]\t Certificate password\n";
                     helpMessage += "-timestampserver \t\t[URL]\t\t Timestamp server URL\n";
                     helpMessage += "-pdfoutput \t\t[path]\t\t Signed PDF output path\n";
+                    helpMessage += "-openpdfaftersign \t\t[path]\t\t Open PDF after sign\n";
                     helpMessage += "-help \t\t\t\t\t show this help\n";
 
                     MessageBox.Show(helpMessage,"PDFeSignHandwritten");

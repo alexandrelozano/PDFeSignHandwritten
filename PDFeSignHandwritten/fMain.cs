@@ -312,7 +312,9 @@ namespace PDFeSignHandwritten
                 signer.SignDetached(pks, chain, null, null, tsaClient, 8192, PdfSigner.CryptoStandard.CMS);
 
                 MessageBox.Show("Signed PDF saved at " + frmSign.txtPDFOutput.Text, "PDFeSignHandwritten", MessageBoxButtons.OK);
-                Process.Start(frmSign.txtPDFOutput.Text);
+
+                if (frmSign.chkOpenPDFAfterSign.Checked)
+                    Process.Start(frmSign.txtPDFOutput.Text);
 
                 //reset variables
                 X1 = Y1 = X2 = Y2 = -1;

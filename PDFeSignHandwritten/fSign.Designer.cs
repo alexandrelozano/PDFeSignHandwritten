@@ -55,6 +55,7 @@ namespace PDFeSignHandwritten
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.cboPenWidth = new System.Windows.Forms.ComboBox();
+            this.chkOpenPDFAfterSign = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             this.SuspendLayout();
             // 
@@ -286,11 +287,24 @@ namespace PDFeSignHandwritten
             this.cboPenWidth.TabIndex = 25;
             this.cboPenWidth.SelectedIndexChanged += new System.EventHandler(this.cboPenWidth_SelectedIndexChanged);
             // 
+            // chkOpenPDFAfterSign
+            // 
+            this.chkOpenPDFAfterSign.AutoSize = true;
+            this.chkOpenPDFAfterSign.Checked = true;
+            this.chkOpenPDFAfterSign.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOpenPDFAfterSign.Location = new System.Drawing.Point(543, 355);
+            this.chkOpenPDFAfterSign.Name = "chkOpenPDFAfterSign";
+            this.chkOpenPDFAfterSign.Size = new System.Drawing.Size(122, 17);
+            this.chkOpenPDFAfterSign.TabIndex = 27;
+            this.chkOpenPDFAfterSign.Text = "Open PDF after sign";
+            this.chkOpenPDFAfterSign.UseVisualStyleBackColor = true;
+            // 
             // fSign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 421);
+            this.Controls.Add(this.chkOpenPDFAfterSign);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cboPenWidth);
             this.Controls.Add(this.label9);
@@ -353,5 +367,6 @@ namespace PDFeSignHandwritten
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cboPenWidth;
+        public System.Windows.Forms.CheckBox chkOpenPDFAfterSign;
     }
 }
