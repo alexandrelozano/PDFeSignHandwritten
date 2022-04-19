@@ -42,6 +42,9 @@ namespace PDFeSignHandwritten
             [Option('a', "openpdfaftersign", Required = false, HelpText = "Open PDF after sign.")]
             public string OpenPDFAfterSign { get; set; }
 
+            [Option('i', "image", Required = false, HelpText = "Image to use for sign.")]
+            public string image { get; set; }
+
             [Option('h', "help", Required = false, HelpText = "Show command line parameters.")]
             public bool help { get; set; }
         }
@@ -73,28 +76,30 @@ namespace PDFeSignHandwritten
                 }
 
                 if (!string.IsNullOrEmpty(o.Name)) ConfigurationManager.AppSettings["Name"] = o.Name;
-                if (!string.IsNullOrEmpty(o.ContactInfo)) ConfigurationManager.AppSettings["ContactInfo"] = o.Name;
-                if (!string.IsNullOrEmpty(o.Location)) ConfigurationManager.AppSettings["Location"] = o.Name;
-                if (!string.IsNullOrEmpty(o.Reason)) ConfigurationManager.AppSettings["Reason"] = o.Name;
-                if (!string.IsNullOrEmpty(o.Certificate)) ConfigurationManager.AppSettings["Certificate"] = o.Name;
-                if (!string.IsNullOrEmpty(o.CertificatePassword)) ConfigurationManager.AppSettings["CertificatePassword"] = o.Name;
-                if (!string.IsNullOrEmpty(o.TimestampServer)) ConfigurationManager.AppSettings["TimestampServer"] = o.Name;
-                if (!string.IsNullOrEmpty(o.PDFOutput)) ConfigurationManager.AppSettings["PDFOutput"] = o.Name;
-                if (!string.IsNullOrEmpty(o.OpenPDFAfterSign)) ConfigurationManager.AppSettings["OpenPDFAfterSign"] = o.Name;
+                if (!string.IsNullOrEmpty(o.ContactInfo)) ConfigurationManager.AppSettings["ContactInfo"] = o.ContactInfo;
+                if (!string.IsNullOrEmpty(o.Location)) ConfigurationManager.AppSettings["Location"] = o.Location;
+                if (!string.IsNullOrEmpty(o.Reason)) ConfigurationManager.AppSettings["Reason"] = o.Reason;
+                if (!string.IsNullOrEmpty(o.Certificate)) ConfigurationManager.AppSettings["Certificate"] = o.Certificate;
+                if (!string.IsNullOrEmpty(o.CertificatePassword)) ConfigurationManager.AppSettings["CertificatePassword"] = o.CertificatePassword;
+                if (!string.IsNullOrEmpty(o.TimestampServer)) ConfigurationManager.AppSettings["TimestampServer"] = o.TimestampServer;
+                if (!string.IsNullOrEmpty(o.PDFOutput)) ConfigurationManager.AppSettings["PDFOutput"] = o.PDFOutput;
+                if (!string.IsNullOrEmpty(o.OpenPDFAfterSign)) ConfigurationManager.AppSettings["OpenPDFAfterSign"] = o.OpenPDFAfterSign;
+                if (!string.IsNullOrEmpty(o.image)) frmMain.ImageToOpen = o.image;
 
                 if (o.help)
                 {
                     string helpMessage = "Command line parameters:\n\n";
-                    helpMessage += "-pdf \t\t\t[path]\t\t PDF file to open\n";
-                    helpMessage += "-name \t\t\t[name]\t\t Sign name info\n";
-                    helpMessage += "-contactinfo \t\t[contactinfo]\t Sign contact info\n";
-                    helpMessage += "-location \t\t[location]\t Sign location info\n";
-                    helpMessage += "-reason \t\t\t[reason]\t\t Sign reason info\n";
-                    helpMessage += "-certificate \t\t[certificate]\t Certificate path\n";
-                    helpMessage += "-certificatepassword \t[password]\t Certificate password\n";
-                    helpMessage += "-timestampserver \t\t[URL]\t\t Timestamp server URL\n";
-                    helpMessage += "-pdfoutput \t\t[path]\t\t Signed PDF output path\n";
-                    helpMessage += "-openpdfaftersign \t\t[path]\t\t Open PDF after sign\n";
+                    helpMessage += "-p \t\t\t[path]\t\t PDF file to open\n";
+                    helpMessage += "-n \t\t\t[name]\t\t Sign name info\n";
+                    helpMessage += "-c \t\t[contactinfo]\t Sign contact info\n";
+                    helpMessage += "-l \t\t[location]\t Sign location info\n";
+                    helpMessage += "-r \t\t\t[reason]\t\t Sign reason info\n";
+                    helpMessage += "-f \t\t[certificate]\t Certificate path\n";
+                    helpMessage += "-p \t[password]\t Certificate password\n";
+                    helpMessage += "-t \t\t[URL]\t\t Timestamp server URL\n";
+                    helpMessage += "-o \t\t[path]\t\t Signed PDF output path\n";
+                    helpMessage += "-a \t\t\t\t Open PDF after sign\n";
+                    helpMessage += "-i \t\t[path]\t\t Image to use for sign\n";
                     helpMessage += "-help \t\t\t\t\t show this help\n";
 
                     MessageBox.Show(helpMessage,"PDFeSignHandwritten");

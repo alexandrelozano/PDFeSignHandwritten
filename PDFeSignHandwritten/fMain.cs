@@ -27,6 +27,7 @@ namespace PDFeSignHandwritten
     public partial class fMain : Form
     {
         public string PDFPathToOpenAtStart = "";
+        public string ImageToOpen = "";
 
         PdfReader PDFReader;
         PdfDocument PDFDocument;
@@ -230,7 +231,12 @@ namespace PDFeSignHandwritten
 
             Cursor = Cursors.WaitCursor;
 
-            if (frmSign == null) frmSign = new fSign();
+            if (frmSign == null) 
+                frmSign = new fSign();
+
+            if (ImageToOpen != "")
+                frmSign.fillPictureBox(frmSign.picSign, new Bitmap(ImageToOpen));
+
             frmSign.ShowDialog();
 
             if (frmSign.sign)

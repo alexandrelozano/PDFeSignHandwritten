@@ -206,7 +206,7 @@ namespace PDFeSignHandwritten
             }
         }
 
-        static public void fillPictureBox(PictureBox pbox, Bitmap bmp)
+        public void fillPictureBox(PictureBox pbox, Bitmap bmp)
         {
             pbox.SizeMode = PictureBoxSizeMode.Normal;
             bool source_is_wider = (float)bmp.Width / bmp.Height > (float)pbox.Width / pbox.Height;
