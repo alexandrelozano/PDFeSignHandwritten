@@ -25,7 +25,7 @@ Download windows portable version [PDFeSignHandwritten v1.5.3](https://github.co
 | t | [URL] | Timestamp server URL |
 | o | [path] | Signed PDF output path |
 | i | [path] | Image to use for sign |
-| a | [path] | Open PDF after sign |
+| a | | Open PDF after sign |
 | h | | Show help |
 
 ## Changelog
