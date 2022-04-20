@@ -234,8 +234,10 @@ namespace PDFeSignHandwritten
             if (frmSign == null) 
                 frmSign = new fSign();
 
-            if (ImageToOpen != "")
+            if (ImageToOpen != "" && System.IO.File.Exists(ImageToOpen))
+            {
                 frmSign.fillPictureBox(frmSign.picSign, new Bitmap(ImageToOpen));
+            }
 
             frmSign.ShowDialog();
 
