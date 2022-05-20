@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PDFeSignHandwritten",
+    "\\PDFeSignHandwritten\\samples"
   ],
-  "SelectedNode": "\\PDFeSignHandwritten.sln",
+  "SelectedNode": "\\PDFeSignHandwritten\\fSign.cs",
   "PreviewInSolutionExplorer": false
 }

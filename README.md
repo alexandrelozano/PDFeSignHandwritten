@@ -29,6 +29,8 @@ Download windows portable version [PDFeSignHandwritten v1.5.3](https://github.co
 | h | | Show help |
 
 ## Changelog
+### v1.5.4
+- New button in main screen to fill PDF fields
 ### v1.5.3
 - New option to open PDF after sign
 - New command line option to set the image to use for sign
