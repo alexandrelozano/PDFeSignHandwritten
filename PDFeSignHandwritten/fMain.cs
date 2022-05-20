@@ -69,13 +69,20 @@ namespace PDFeSignHandwritten
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Cursor = Cursors.WaitCursor;
-                PDFPath = dlg.FileName;
+
+                PDFPath = GetTmpPDF();
+                System.IO.File.Copy(dlg.FileName, PDFPath);
                 PDFReader = new PdfReader(PDFPath);
                 PDFDocument = new PdfDocument(PDFReader);
                 Cursor = Cursors.Default;
                 PageCurrent = 1;
                 ShowPage();
             }
+        }
+
+        private string GetTmpPDF()
+        {
+            return System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
         }
 
         private void ShowPage()
@@ -219,13 +226,13 @@ namespace PDFeSignHandwritten
         {
             if (PDFPath == null)
             {
-                MessageBox.Show("First you need to open a PDF to sign", "PDF Sign", MessageBoxButtons.OK);
+                MessageBox.Show("First you need to open a PDF to sign", "PDFeSignHandwritten", MessageBoxButtons.OK);
                 return;
             }
 
             if (X1==-1 || Y1==-1 || X2==-1 || Y2 == -1)
             {
-                MessageBox.Show("First you need to draw a rectangle on the page", "PDF Sign", MessageBoxButtons.OK);
+                MessageBox.Show("First you need to draw a rectangle on the page", "PDFeSignHandwritten", MessageBoxButtons.OK);
                 return;
             }
 
@@ -363,11 +370,35 @@ namespace PDFeSignHandwritten
             if (!String.IsNullOrEmpty(PDFPathToOpenAtStart))
             {
                 Cursor = Cursors.WaitCursor;
-                PDFPath = PDFPathToOpenAtStart;
+                PDFPath = GetTmpPDF();
+                System.IO.File.Copy(PDFPathToOpenAtStart, PDFPath);
                 PDFReader = new PdfReader(PDFPath);
                 PDFDocument = new PdfDocument(PDFReader);
                 Cursor = Cursors.Default;
                 PageCurrent = 1;
+                ShowPage();
+            }
+        }
+
+        private void bttFormFieldsEdit_Click(object sender, EventArgs e)
+        {
+            if (PDFPath == "")
+            {
+                MessageBox.Show("First you need to load a PDF", "PDFeSignHandwritten", MessageBoxButtons.OK);
+                return;
+            }
+
+            fFormFields frmFormFields = new fFormFields();
+            frmFormFields.PDFPath = this.PDFPath;
+            frmFormFields.ShowDialog();
+
+            if (frmFormFields.PDFPath != PDFPath)
+            {
+                PDFDocument.Close();
+
+                PDFPath = frmFormFields.PDFPath;
+                PDFReader = new PdfReader(PDFPath);
+                PDFDocument = new PdfDocument(PDFReader);
                 ShowPage();
             }
         }

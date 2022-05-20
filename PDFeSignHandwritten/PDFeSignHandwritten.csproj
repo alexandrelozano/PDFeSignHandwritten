@@ -160,6 +160,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fFormFields.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fFormFields.Designer.cs">
+      <DependentUpon>fFormFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="fMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +180,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="fFormFields.resx">
+      <DependentUpon>fFormFields.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -1154,6 +1163,9 @@
     <None Include="samples\sample.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="samples\sampleform.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -1172,6 +1184,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\picture_import.gif" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\disk.png" />
+    <None Include="Resources\table_edit.gif" />
     <Content Include="samples\PDFeSignHandwritten.gif" />
   </ItemGroup>
   <ItemGroup>

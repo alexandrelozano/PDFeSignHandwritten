@@ -117,23 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="picture_import" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\picture_import.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="page_white_acrobat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\page_white_acrobat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="disk" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\disk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="table_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\table_edit.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <metadata name="FieldName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="FieldValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAETxU9ydehvtIh7z7QYy7wSx2siIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAANadccTTmG300ZVn/y1lgf+Tx/n/kMn5/0CEyf8jZaX/p4Fk/8KDUf/Cg1H/woNR/8KD
+        Uf+6dkGwAAAAAAAAAADXoHT/+PLt//fw6v9CiKn/4PL//1OZ2P8Zeb3/SJfE/0aLwv/Q0tf/8OLY//Di
+        2P/w4tj/xIlc/QAAAAAAAAAA2aN5//nz7v/r0r3/psTZ/3m11f+PttH/VMnk/1rf9f930O3/UJzd/+Tw
+        +v//////8OLY/8WLXv8AAAAAAAAAAN2nff/58+//69C5/+vQuv+mtrj/dbjV/8H2/f9i3/f/XOL4/3jT
+        8P9Iltr/1MS4//Di2P/FiVv/AAAAAAAAAADfqYH/+fPv/+rOtv//////69C6/7DW5/92y+f/x/f9/13c
+        9f9Z4ff/etTx/0uZ3v/K0Nj/yIxe/wAAAAAAAAAA4a2G//r08P/qy7H/6syy/+rMsv/qzLL/r8O+/3jT
+        7v/H9/3/Xtz1/1ri9/951vL/T5/e/6uGav8AAAAAAAAAAOOwi//69vH/6smt///////qya//////////
+        ///A6/f/fNTt/8P2/f9r3fb/bMrt/2Ki1/9kmMn/UJHKJgAAAADls47/+vby/+nFqf/pxav/6ser/+nH
+        rP/pya3/6cmv/6XAvf+A1e3/seP5/4q/5/+t0/b/w+D8/2We0/cAAAAA57aT//v39P/pwqX//////+jD
+        qP/////////////////ox6v/sOb1/3a95/+z0vD/5fP//6vS7/9Hi8foAAAAAOm5l//79/T/6cKl/+nC
+        pf/pwqX/6cKl/+nCpf/pwqX/6cKl/+nCpf+svLf/V6TY/4Sw2/9FnND/KpTRXgAAAADrvJr/+/f0////
+        ///////////////////////////////////////////////////79/T/0ZZp/wAAAAAAAAAA7L6d//v3
+        9P+b1aT/l9Og/5PQnP+Pzpf/isuS/4bJjf+BxYj/fcKD/3nAf/91vXv/+/f0/9Sabv8AAAAAAAAAAO7A
+        oOv79/T/+/f0//v39P/79/T/+/f0//v39P/79/T/+/f0//v39P/79/T/+/f0//v39P/Xn3P4AAAAAAAA
+        AADvwaJ+78Ch4+2/nv/rvZz/67uZ/+m5lf/ntpL/5rSP/+Sxi//irof/4KuD/92of//cpHz/2qJ5ygAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA8H+sQYABrEGAAaxBgAGsQYABrEGAAaxBgAGsQYAArEGAAKxBgACsQYAArEGAAaxBgAGsQYAB
+        rEGAAaxB//+sQQ==
+</value>
   </data>
 </root>

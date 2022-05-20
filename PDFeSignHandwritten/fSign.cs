@@ -204,6 +204,11 @@ namespace PDFeSignHandwritten
             {
                 fillPictureBox(picSign, new Bitmap(open.FileName));
             }
+            else
+            {
+                Bitmap bmp = new Bitmap(picSign.Width, picSign.Height);
+                picSign.Image = bmp;
+            }
         }
 
         public void fillPictureBox(PictureBox pbox, Bitmap bmp)

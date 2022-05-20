@@ -33,9 +33,10 @@ namespace PDFeSignHandwritten
             this.lblPageInfo = new System.Windows.Forms.Label();
             this.bttPageNext = new System.Windows.Forms.Button();
             this.bttPagePrev = new System.Windows.Forms.Button();
-            this.bttPDFSign = new System.Windows.Forms.Button();
+            this.bttFormFieldsEdit = new System.Windows.Forms.Button();
             this.picPDF = new System.Windows.Forms.PictureBox();
             this.bttPDFOpen = new System.Windows.Forms.Button();
+            this.bttPDFSign = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picPDF)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,17 +69,17 @@ namespace PDFeSignHandwritten
             this.bttPagePrev.UseVisualStyleBackColor = true;
             this.bttPagePrev.Click += new System.EventHandler(this.bttPagePrev_Click);
             // 
-            // bttPDFSign
+            // bttFormFieldsEdit
             // 
-            this.bttPDFSign.Image = global::PDFeSignHandwritten.Properties.Resources.pencil;
-            this.bttPDFSign.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bttPDFSign.Location = new System.Drawing.Point(319, 10);
-            this.bttPDFSign.Name = "bttPDFSign";
-            this.bttPDFSign.Size = new System.Drawing.Size(139, 33);
-            this.bttPDFSign.TabIndex = 6;
-            this.bttPDFSign.Text = "Sign...";
-            this.bttPDFSign.UseVisualStyleBackColor = true;
-            this.bttPDFSign.Click += new System.EventHandler(this.bttPDFSign_Click);
+            this.bttFormFieldsEdit.Image = global::PDFeSignHandwritten.Properties.Resources.table_edit;
+            this.bttFormFieldsEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bttFormFieldsEdit.Location = new System.Drawing.Point(464, 10);
+            this.bttFormFieldsEdit.Name = "bttFormFieldsEdit";
+            this.bttFormFieldsEdit.Size = new System.Drawing.Size(139, 33);
+            this.bttFormFieldsEdit.TabIndex = 12;
+            this.bttFormFieldsEdit.Text = "Edit form fields...";
+            this.bttFormFieldsEdit.UseVisualStyleBackColor = true;
+            this.bttFormFieldsEdit.Click += new System.EventHandler(this.bttFormFieldsEdit_Click);
             // 
             // picPDF
             // 
@@ -108,11 +109,24 @@ namespace PDFeSignHandwritten
             this.bttPDFOpen.UseVisualStyleBackColor = true;
             this.bttPDFOpen.Click += new System.EventHandler(this.bttPDFOpen_Click);
             // 
+            // bttPDFSign
+            // 
+            this.bttPDFSign.Image = global::PDFeSignHandwritten.Properties.Resources.pencil;
+            this.bttPDFSign.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bttPDFSign.Location = new System.Drawing.Point(319, 10);
+            this.bttPDFSign.Name = "bttPDFSign";
+            this.bttPDFSign.Size = new System.Drawing.Size(139, 33);
+            this.bttPDFSign.TabIndex = 6;
+            this.bttPDFSign.Text = "Sign...";
+            this.bttPDFSign.UseVisualStyleBackColor = true;
+            this.bttPDFSign.Click += new System.EventHandler(this.bttPDFSign_Click);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 641);
+            this.Controls.Add(this.bttFormFieldsEdit);
             this.Controls.Add(this.picPDF);
             this.Controls.Add(this.lblPageInfo);
             this.Controls.Add(this.bttPageNext);
@@ -137,6 +151,7 @@ namespace PDFeSignHandwritten
         internal System.Windows.Forms.Button bttPagePrev;
         internal System.Windows.Forms.Button bttPDFOpen;
         internal System.Windows.Forms.Button bttPDFSign;
+        internal System.Windows.Forms.Button bttFormFieldsEdit;
     }
 }
 
