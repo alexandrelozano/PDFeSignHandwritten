@@ -1,5 +1,5 @@
 # PDFeSignHandwritten
-Windows executable for sign a PDF with a certificate and a handwritten firm.
+Windows executable to sign a PDF with a certificate and a handwritten firm.
 
 Winforms csharp .NET 4.7.2
 
