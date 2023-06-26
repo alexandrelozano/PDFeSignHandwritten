@@ -29,6 +29,9 @@ Download windows portable version [PDFeSignHandwritten v1.5.5](https://github.co
 | h | | Show help |
 
 ## Changelog
+### v1.5.5
+- Make electronic signature optional
+- Bugfix: edit form fields can raise a null exception
 ### v1.5.4
 - New button in main screen to fill PDF fields
 ### v1.5.3
