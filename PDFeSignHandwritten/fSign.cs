@@ -255,5 +255,10 @@ namespace PDFeSignHandwritten
         {
             AdjustPen();
         }
+
+        private void chkeSign_CheckedChanged(object sender, EventArgs e)
+        {
+            grpeSign.Enabled = chkeSign.Checked;
+        }
     }
 }
