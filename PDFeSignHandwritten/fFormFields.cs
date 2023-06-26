@@ -89,7 +89,10 @@ namespace PDFeSignHandwritten
                 {
                     if ((string)r.Cells["FieldName"].Tag == field.Key)
                     {
-                        field.Value.SetValue((string)r.Cells["FieldValue"].Value);
+                        if (r.Cells["FieldValue"].Value != null)
+                        {
+                            field.Value.SetValue((string)r.Cells["FieldValue"].Value);
+                        }
                     }
                 }
             }
