@@ -92,7 +92,7 @@ namespace PDFeSignHandwritten
             // 
             // bttSign
             // 
-            this.bttSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bttSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bttSign.Image = global::PDFeSignHandwritten.Properties.Resources.pencil;
             this.bttSign.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bttSign.Location = new System.Drawing.Point(543, 378);
@@ -105,6 +105,7 @@ namespace PDFeSignHandwritten
             // 
             // cboPenColor
             // 
+            this.cboPenColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cboPenColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPenColor.FormattingEnabled = true;
             this.cboPenColor.Location = new System.Drawing.Point(252, 384);
@@ -115,6 +116,7 @@ namespace PDFeSignHandwritten
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(191, 387);
             this.label9.Name = "label9";
@@ -124,6 +126,7 @@ namespace PDFeSignHandwritten
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(378, 387);
             this.label10.Name = "label10";
@@ -133,6 +136,7 @@ namespace PDFeSignHandwritten
             // 
             // cboPenWidth
             // 
+            this.cboPenWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cboPenWidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPenWidth.FormattingEnabled = true;
             this.cboPenWidth.Location = new System.Drawing.Point(439, 384);
@@ -143,6 +147,7 @@ namespace PDFeSignHandwritten
             // 
             // chkOpenPDFAfterSign
             // 
+            this.chkOpenPDFAfterSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkOpenPDFAfterSign.AutoSize = true;
             this.chkOpenPDFAfterSign.Checked = true;
             this.chkOpenPDFAfterSign.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -155,6 +160,7 @@ namespace PDFeSignHandwritten
             // 
             // grpeSign
             // 
+            this.grpeSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grpeSign.Controls.Add(this.txtTimestampServer);
             this.grpeSign.Controls.Add(this.label8);
             this.grpeSign.Controls.Add(this.txtCertificatePassword);
@@ -300,6 +306,7 @@ namespace PDFeSignHandwritten
             // 
             // chkeSign
             // 
+            this.chkeSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkeSign.AutoSize = true;
             this.chkeSign.Checked = true;
             this.chkeSign.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -313,6 +320,7 @@ namespace PDFeSignHandwritten
             // 
             // bttPDFOutput
             // 
+            this.bttPDFOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bttPDFOutput.Location = new System.Drawing.Point(683, 329);
             this.bttPDFOutput.Name = "bttPDFOutput";
             this.bttPDFOutput.Size = new System.Drawing.Size(24, 22);
@@ -322,6 +330,7 @@ namespace PDFeSignHandwritten
             // 
             // txtPDFOutput
             // 
+            this.txtPDFOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPDFOutput.Location = new System.Drawing.Point(553, 329);
             this.txtPDFOutput.Name = "txtPDFOutput";
             this.txtPDFOutput.Size = new System.Drawing.Size(131, 20);
@@ -329,6 +338,7 @@ namespace PDFeSignHandwritten
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(553, 313);
             this.label5.Name = "label5";
@@ -355,9 +365,11 @@ namespace PDFeSignHandwritten
             this.Controls.Add(this.picSign);
             this.Controls.Add(this.bttSign);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "fSign";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Draw your signature in the box";
+            this.Resize += new System.EventHandler(this.fSign_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).EndInit();
             this.grpeSign.ResumeLayout(false);
             this.grpeSign.PerformLayout();

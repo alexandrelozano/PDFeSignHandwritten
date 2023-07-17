@@ -260,5 +260,11 @@ namespace PDFeSignHandwritten
         {
             grpeSign.Enabled = chkeSign.Checked;
         }
+
+        private void fSign_Resize(object sender, EventArgs e)
+        {
+            Bitmap bmp = new Bitmap(picSign.Width, picSign.Height);
+            picSign.Image = bmp;
+        }
     }
 }
